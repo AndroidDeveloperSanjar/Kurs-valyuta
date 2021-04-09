@@ -1,189 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_5sdp"
-    app:cardBackgroundColor="#ECEFF1"
-    app:cardCornerRadius="@dimen/_3sdp"
-    app:cardElevation="@dimen/_5sdp">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_2sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_banl_logo"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/ic_bank" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_bank_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/g_black"
-                android:text="Qishloq qurilish bank"
-                android:textColor="#263238"
-                android:textSize="@dimen/_17ssp" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_banl_logo"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_bank" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_bank_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/g_black"
+                    android:text="Qishloq qurilish bank"
+                    android:textColor="#263238"
+                    android:textSize="@dimen/_17ssp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_calculate"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentEnd="true"
+                        app:srcCompat="@drawable/ic_calculate" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_calculate"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_calculate" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_black"
+                    android:text="Sotish"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/_15ssp" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/g_black"
+                    android:text="Olish"
+                    android:textColor="#1976D2"
+                    android:textSize="@dimen/_15ssp" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_usa_sotish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/g_medium"
+                    android:text="10440.00"
+                    android:textColor="#90A4AE"
+                    android:textSize="@dimen/_15ssp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/usa" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_usa_olish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/g_medium"
+                    android:text="10510.00"
+                    android:textColor="#90A4AE"
+                    android:textSize="@dimen/_15ssp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_euro_sotish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/g_medium"
+                    android:text="10440.00"
+                    android:textColor="#90A4AE"
+                    android:textSize="@dimen/_15ssp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/euro" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_euro_olish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/g_medium"
+                    android:text="10510.00"
+                    android:textColor="#90A4AE"
+                    android:textSize="@dimen/_15ssp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_british_sotish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/g_medium"
+                    android:text="10440.00"
+                    android:textColor="#90A4AE"
+                    android:textSize="@dimen/_15ssp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/british" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_british_olish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/g_medium"
+                    android:text="10510.00"
+                    android:textColor="#90A4AE"
+                    android:textSize="@dimen/_15ssp" />
+            </RelativeLayout>
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_5sdp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/g_black"
-                android:text="Sotish"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="@dimen/_15ssp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/g_black"
-                android:text="Olish"
-                android:textColor="#1976D2"
-                android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_usa_sotish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/g_medium"
-                android:text="10440.00"
-                android:textColor="#90A4AE"
-                android:textSize="@dimen/_15ssp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerInParent="true"
-                app:srcCompat="@drawable/usa" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_usa_olish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/g_medium"
-                android:text="10510.00"
-                android:textColor="#90A4AE"
-                android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_euro_sotish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/g_medium"
-                android:text="10440.00"
-                android:textColor="#90A4AE"
-                android:textSize="@dimen/_15ssp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerInParent="true"
-                app:srcCompat="@drawable/euro" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_euro_olish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/g_medium"
-                android:text="10510.00"
-                android:textColor="#90A4AE"
-                android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_british_sotish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/g_medium"
-                android:text="10440.00"
-                android:textColor="#90A4AE"
-                android:textSize="@dimen/_15ssp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerInParent="true"
-                app:srcCompat="@drawable/british" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_british_olish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/g_medium"
-                android:text="10510.00"
-                android:textColor="#90A4AE"
-                android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
