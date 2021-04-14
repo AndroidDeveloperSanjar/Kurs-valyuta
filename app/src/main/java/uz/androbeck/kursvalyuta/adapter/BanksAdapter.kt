@@ -37,9 +37,11 @@ class BanksAdapter(
                     .build()
                 ivBankLogo.load(data.banksLogo, imageLoader) {
                     crossfade(true)
-                    crossfade(2000)
+                    crossfade(1000)
                 }
                 tvBankName.text = data.bankName
+                tvMoneySell.text = data.sellMoney
+                tvMoneyBuy.text = data.buyMoney
                 if (adapterPosition != RecyclerView.NO_POSITION)
                     root.setOnClickListener {
                         listener.itemClick(adapterPosition, data)

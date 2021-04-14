@@ -2,9 +2,11 @@
   <dictionary name="sanjar">
     <words>
       <w>jsoup</w>
+      <w>kurs</w>
       <w>olish</w>
       <w>sotish</w>
       <w>valyut</w>
+      <w>valyuta</w>
     </words>
   </dictionary>
 </component>

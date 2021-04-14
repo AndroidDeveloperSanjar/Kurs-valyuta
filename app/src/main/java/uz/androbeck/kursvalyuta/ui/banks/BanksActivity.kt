@@ -10,6 +10,7 @@ import uz.androbeck.kursvalyuta.MainActivity
 import uz.androbeck.kursvalyuta.adapter.BanksAdapter
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ActivityBanksBinding
+import uz.androbeck.kursvalyuta.ui.dialogs.kurs_type.KursTypeDialogFragment
 import uz.androbeck.kursvalyuta.utils.Helper
 
 class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener {
@@ -20,13 +21,29 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener {
 
     private var dataList = ArrayList<BanksModel>()
 
+    private lateinit var kursTypeDialogFragment: KursTypeDialogFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        init()
+
         initRV()
 
-        //getAllDataWithJsoup()
+        clicks()
+    }
+
+    private fun init() {
+        kursTypeDialogFragment = KursTypeDialogFragment()
+    }
+
+    private fun clicks() {
+        with(binding) {
+            ivKursUpdate.setOnClickListener {
+                kursTypeDialogFragment.show(supportFragmentManager, "kurs_type_dialog")
+            }
+        }
     }
 
     private fun initRV() {

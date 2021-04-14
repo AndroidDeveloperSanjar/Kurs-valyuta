@@ -258,73 +258,97 @@ object Helper {
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.asaka_bank_logo,
-                bankName = "Asaka bank"
+                bankName = "Asaka bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.hamkor_bank_logo,
-                bankName = "Hamkor bank"
+                bankName = "Hamkor bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.ipoteka_bank_logo,
-                bankName = "Ipoteka bank"
+                bankName = "Ipoteka bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.kapital_bank_logo,
-                bankName = "Kapital bank"
+                bankName = "Kapital bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.agro_bank_logo,
-                bankName = "Agro bank"
+                bankName = "Agro bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.mikro_kredit_bank_logo,
-                bankName = "Mikro kredit bank"
+                bankName = "Mikro kredit bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.nbu_logo,
-                bankName = "NBU"
+                bankName = "NBU",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.qqb_logo,
-                bankName = "Qishloq qurilish bank"
+                bankName = "Qishloq qurilish bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.ravnaq_bank_logo,
-                bankName = "Ravnaq bank"
+                bankName = "Ravnaq bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.sanoat_qurilish_bank_logo,
-                bankName = "Sanot qurilish bank"
+                bankName = "Sanot qurilish bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.tenge_bank,
-                bankName = "Tenge bank"
+                bankName = "Tenge bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         dataList.add(
             BanksModel(
                 banksLogo = R.drawable.turon_bank_logo,
-                bankName = "Turon bank"
+                bankName = "Turon bank",
+                sellMoney = "10430 so'm",
+                buyMoney = "10540 so'm"
             )
         )
         return dataList

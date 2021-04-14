@@ -27,29 +27,6 @@ class MainActivity : AppCompatActivity(), MainAdapter.MainAdapterListener,
         init()
 
         initRV()
-
-        getAllDataWithJsoup()
-    }
-
-    private fun getAllDataWithJsoup() {
-        CoroutineScope(IO).launch {
-            getDataFromAgroBank()
-            getDataFromAsakaBank()
-        }
-    }
-
-    private fun getDataFromAgroBank() {
-        val documentAgroBank = Objects.document("https://www.agrobank.uz/")
-        val imageElementsAgroBank = documentAgroBank.getElementsByClass("header__logo-desktop")
-        val logoAgroBank = imageElementsAgroBank[0].absUrl("src")
-        println("agrobank -> ${logoAgroBank}")
-    }
-
-    private fun getDataFromAsakaBank() {
-        val documentAsakaBank = Objects.document("https://asakabank.uz/uz")
-        val imageElementsAsakaBank = documentAsakaBank.getElementsByTag("img")
-        val logoAsakaBank = imageElementsAsakaBank[0].absUrl("src")
-        println("asakbank -> ${logoAsakaBank}")
     }
 
     private fun init() {
