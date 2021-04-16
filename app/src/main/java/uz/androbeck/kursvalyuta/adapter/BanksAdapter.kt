@@ -1,5 +1,6 @@
 package uz.androbeck.kursvalyuta.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,15 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.load
+import uz.androbeck.kursvalyuta.R
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ItemBanksBinding
 
+@SuppressLint("SetTextI18n")
 class BanksAdapter(
-    private val listener: BanksAdapterListener
+    private val listener: BanksAdapterListener,
+    private val kursType: Int
 ) : ListAdapter<BanksModel, BanksAdapter.BanksViewHolder>(DIFF_JOB_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        BanksViewHolder(ItemBanksBinding.inflate(LayoutInflater.from(parent.context)), listener)
+        BanksViewHolder(
+            ItemBanksBinding.inflate(LayoutInflater.from(parent.context)),
+            listener,
+            kursType
+        )
 
     override fun onBindViewHolder(holder: BanksViewHolder, position: Int) {
         holder.bind()
@@ -25,7 +33,8 @@ class BanksAdapter(
     inner class BanksViewHolder
     constructor(
         private val binding: ItemBanksBinding,
-        private val listener: BanksAdapterListener
+        private val listener: BanksAdapterListener,
+        private val kursType: Int
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             val data = getItem(adapterPosition)
@@ -42,6 +51,20 @@ class BanksAdapter(
                 tvBankName.text = data.bankName
                 tvMoneySell.text = data.sellMoney
                 tvMoneyBuy.text = data.buyMoney
+                when (kursType) {
+                    0 -> {
+                        tvKursType.text = "Dollar"
+                        ivMoneyKurs.setImageResource(R.drawable.ic_kurs_dollar)
+                    }
+                    1 -> {
+                        tvKursType.text = "Ruble"
+                        ivMoneyKurs.setImageResource(R.drawable.ic_kurs_ruble)
+                    }
+                    2 -> {
+                        tvKursType.text = "Euro"
+                        ivMoneyKurs.setImageResource(R.drawable.ic_kurs_euro)
+                    }
+                }
                 if (adapterPosition != RecyclerView.NO_POSITION)
                     root.setOnClickListener {
                         listener.itemClick(adapterPosition, data)

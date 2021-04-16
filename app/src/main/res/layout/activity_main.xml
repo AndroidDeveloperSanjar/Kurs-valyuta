@@ -49,15 +49,15 @@
         <com.baoyz.widget.PullRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layoutAnimation="@anim/layout_animation">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_main" />
+                tools:listitem="@layout/item_main"
+                android:layoutAnimation="@anim/layout_animation"/>
         </com.baoyz.widget.PullRefreshLayout>
 
     </LinearLayout>

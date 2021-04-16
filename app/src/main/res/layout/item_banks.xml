@@ -66,10 +66,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:alpha="0.3"
-                    android:text="Sotish"
+                    android:text="Olish"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     app:fontFamily="@font/g_medium" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_kurs_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:alpha="0.3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    app:fontFamily="@font/g_medium"
+                    tools:text="Dollar" />
+
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -77,49 +90,49 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:alpha="0.3"
-                    android:text="Olish"
+                    android:text="Sotish"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     app:fontFamily="@font/g_medium" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_height="wrap_content">
+                android:layout_marginBottom="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_money_sell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    tools:text="10510 so'm"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
-                    app:fontFamily="@font/g_medium" />
+                    app:fontFamily="@font/g_medium"
+                    tools:text="10510 so'm" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_money_buy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    tools:text="10430 so'm"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
-                    android:layout_centerVertical="true"
-                    app:fontFamily="@font/g_medium" />
+                    app:fontFamily="@font/g_medium"
+                    tools:text="10430 so'm" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_money_kurs"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_centerInParent="true"
-                    app:srcCompat="@drawable/ic_kurs_dollar"
                     android:padding="@dimen/_2sdp"
-                    android:background="@drawable/bg_kurs_iv"/>
+                    app:srcCompat="@drawable/ic_kurs_dollar" />
             </RelativeLayout>
         </LinearLayout>
 
