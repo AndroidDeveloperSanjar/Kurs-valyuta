@@ -16,7 +16,7 @@ import uz.androbeck.kursvalyuta.databinding.ActivityBanksBinding
 import uz.androbeck.kursvalyuta.db.preferences.PreferencesManager
 import uz.androbeck.kursvalyuta.toast
 import uz.androbeck.kursvalyuta.ui.dialogs.Dialogs
-import uz.androbeck.kursvalyuta.utils.Helper
+import uz.androbeck.kursvalyuta.visible
 
 @SuppressLint("SetTextI18n")
 class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
@@ -32,6 +32,8 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
     private val viewModel: BanksViewModel by viewModels()
 
+    private val dataList = ArrayList<BanksModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,12 +43,16 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
         initRV()
 
         clicks()
+
+        observeDataFromMarkaziyBank()
+
+        observeDataFromAsakaBank()
+
+        binding.cvProgress.visible(true)
     }
 
     private fun init() {
         preferenceManager = PreferencesManager(this)
-
-        setKursTypeToTV()
 
         dialogs = Dialogs(this)
 
@@ -54,62 +60,132 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
             refreshLayout.setOnRefreshListener(this@BanksActivity)
             refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_SMARTISAN)
         }
+    }
 
+    private fun observeDataFromMarkaziyBank() {
         with(binding) {
-            viewModel.getMarkaziyBankValyuta().observe(this@BanksActivity, {
-                if (it != null) {
-                    when (preferenceManager.kursDialogValyuta) {
-                        0 -> {
-
-                        }
-                        1 -> {
-
-                        }
-                        2 -> {
-
-                        }
-                    }
-                    println("dsadsa -> " + it[0].text())
-                    println("dsadsa -> " + it[1].text())
+            viewModel.getMarkaziyBankValyuta().observe(this@BanksActivity, { elements ->
+                if (elements != null) {
+                    tvCbuUsd.text = elements[0].text()
+                    tvCbuEur.text = elements[1].text()
+                    tvCbuRub.text = elements[2].text()
+                    tvCbuGbp.text = elements[3].text()
+                    tvCbuJpy.text = elements[4].text()
+                    tvCbuChf.text = elements[5].text()
                 }
             })
+        }
+    }
+
+    private fun observeDataFromAsakaBank() {
+        viewModel.getAsakaBankValyuta().observe(this, { elements ->
+            if (elements != null) {
+                val dollarBuy = elements[2].text()
+                val dollarSale = elements[3].text()
+                val euroBuy = elements[4].text()
+                val euroSale = elements[5].text()
+                val gbpBuy = elements[6].text()
+                val gbpSale = elements[7].text()
+                dataList.add(
+                    BanksModel(
+                        banksLogo = R.drawable.asaka_bank_logo,
+                        bankName = "Asaka bank",
+                        buyUsd = "$dollarBuy so'm",
+                        saleUsd = "$dollarSale so'm",
+                        buyEur = "$euroBuy so'm",
+                        saleEur = "$euroSale so'm",
+                        buyGbp = "$gbpBuy so'm",
+                        saleGbp = "$gbpSale so'm",
+                    )
+                )
+                //banksAdapter.submitList(dataList)
+                observeDataFromIpotekaBank()
+            }
+        })
+    }
+
+    private fun observeDataFromIpotekaBank() {
+        viewModel.getIpotekaBankValyuta().observe(this, { elements ->
+            if (elements != null) {
+                val buyUsd =
+                    elements[0].getElementsByClass("purchase")[0].getElementsByClass("corrupt")
+                        .text()
+                val saleUsd =
+                    elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[0].text()
+                val buyEur =
+                    elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[1].text()
+                val saleEur =
+                    elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[1].text()
+                val buyGbp =
+                    elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[2].text()
+                val saleGbp =
+                    elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[2].text()
+                dataList.add(
+                    BanksModel(
+                        banksLogo = R.drawable.ipoteka_bank_logo,
+                        bankName = "Ipoteka bank",
+                        buyUsd = "$buyUsd so'm",
+                        saleUsd = "$saleUsd so'm",
+                        buyEur = "$buyEur so'm",
+                        saleEur = "$saleEur so'm",
+                        buyGbp = "$buyGbp so'm",
+                        saleGbp = "$saleGbp so'm",
+                    )
+                )
+                observeDataFromKapitalBank()
+            }
+        })
+    }
+
+    private fun observeDataFromKapitalBank() {
+        viewModel.getKapitalBankValyuta().observe(this) { elements ->
+            if (elements != null) {
+                val buyUsd =
+                    elements[0].getElementsByClass("item-desc")[0].getElementsByTag("span")[0].text()
+                val saleUsd =
+                    elements[0].getElementsByClass("item-desc")[0].getElementsByTag("span")[2].text()
+                val buyEur =
+                    elements[0].getElementsByClass("item-desc")[1].getElementsByTag("span")[0].text()
+                val saleEur =
+                    elements[0].getElementsByClass("item-desc")[1].getElementsByTag("span")[2].text()
+                val buyGbp =
+                    elements[0].getElementsByClass("item-desc")[2].getElementsByTag("span")[0].text()
+                val saleGbp =
+                    elements[0].getElementsByClass("item-desc")[2].getElementsByTag("span")[2].text()
+                dataList.add(
+                    BanksModel(
+                        banksLogo = R.drawable.kapital_bank_logo,
+                        bankName = "Kapital bank",
+                        buyUsd = "$buyUsd so'm",
+                        saleUsd = "$saleUsd so'm",
+                        buyEur = "$buyEur so'm",
+                        saleEur = "$saleEur so'm",
+                        buyGbp = "$buyGbp so'm",
+                        saleGbp = "$saleGbp so'm",
+                    )
+                )
+                println(dataList)
+                binding.cvCbu.visible(true)
+                binding.cvProgress.visible(false)
+                banksAdapter.submitList(dataList)
+                binding.rv.scheduleLayoutAnimation()
+            }
         }
     }
 
     private fun clicks() {
         with(binding) {
             ivKursTypeUpdate.setOnClickListener {
-                dialogs.showDialog(this@BanksActivity, preferenceManager, tvKursType, ivKursType)
-            }
-        }
-    }
-
-    private fun setKursTypeToTV() {
-        with(binding) {
-            when (preferenceManager.kursDialogValyuta) {
-                0 -> {
-                    tvKursType.text = "Dollar"
-                    ivKursType.setImageResource(R.drawable.ic_kurs_dollar)
-                }
-                1 -> {
-                    tvKursType.text = "Ruble"
-                    ivKursType.setImageResource(R.drawable.ic_kurs_ruble)
-                }
-                2 -> {
-                    tvKursType.text = "Euro"
-                    ivKursType.setImageResource(R.drawable.ic_kurs_euro)
-                }
+                dialogs.showDialog(this@BanksActivity, preferenceManager)
             }
         }
     }
 
     private fun initRV() {
-        banksAdapter = BanksAdapter(this, preferenceManager.kursDialogValyuta)
+        banksAdapter = BanksAdapter(this)
         with(binding) {
             rv.layoutManager = LinearLayoutManager(this@BanksActivity)
             rv.adapter = banksAdapter
-            banksAdapter.submitList(Helper.banksLogoAndNameList())
-            binding.rv.scheduleLayoutAnimation()
         }
     }
 
@@ -119,6 +195,9 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
     override fun onRefresh() {
         toast("Updated...")
+        dataList.clear()
+        observeDataFromMarkaziyBank()
+        observeDataFromAsakaBank()
         MainScope().launch {
             delay(3000L)
             binding.refreshLayout.setRefreshing(false)
@@ -126,6 +205,6 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
     }
 
     override fun itemKursTypeDialogClick() {
-        initRV()
+
     }
 }

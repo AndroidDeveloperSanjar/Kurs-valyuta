@@ -43,7 +43,7 @@
                     android:fontFamily="@font/g_medium"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_15ssp"
                     tools:text="Asaka bank" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -68,20 +68,20 @@
                     android:alpha="0.3"
                     android:text="Olish"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_kurs_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:alpha="0.3"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    app:fontFamily="@font/g_medium"
-                    tools:text="Dollar" />
+                <!--                <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                    android:id="@+id/tv_kurs_type"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_centerInParent="true"-->
+                <!--                    android:layout_marginStart="@dimen/_10sdp"-->
+                <!--                    android:alpha="0.3"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/_13ssp"-->
+                <!--                    app:fontFamily="@font/g_medium"-->
+                <!--                    tools:text="Dollar" />-->
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -92,9 +92,85 @@
                     android:alpha="0.3"
                     android:text="Sotish"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium" />
 
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_buy_usd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium"
+                    tools:text="10510 so'm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sale_usd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium"
+                    tools:text="10430 so'm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_USD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="USD"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_buy_eur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium"
+                    tools:text="10510 so'm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sale_eur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium"
+                    tools:text="10430 so'm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_EUR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="EUR"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -104,38 +180,38 @@
                 android:layout_marginBottom="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_money_sell"
+                    android:id="@+id/tv_buy_gbp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium"
                     tools:text="10510 so'm" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_money_buy"
+                    android:id="@+id/tv_sale_gbp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium"
                     tools:text="10430 so'm" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_money_kurs"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_GBP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:padding="@dimen/_2sdp"
-                    app:srcCompat="@drawable/ic_kurs_dollar" />
+                    android:text="GBP"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/g_medium" />
             </RelativeLayout>
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

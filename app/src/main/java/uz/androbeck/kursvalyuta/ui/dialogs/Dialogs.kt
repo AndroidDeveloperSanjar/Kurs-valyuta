@@ -17,9 +17,7 @@ class Dialogs(private val listener: DialogListener) {
 
     fun showDialog(
         activity: Activity,
-        preferenceManager: PreferencesManager,
-        tvKursType: AppCompatTextView,
-        ivKursUpdate: AppCompatImageView
+        preferenceManager: PreferencesManager
     ) {
         val builder = AlertDialog.Builder(activity)
         val view = activity.layoutInflater.inflate(R.layout.dialog_kurs_type_fragment, null)
@@ -33,22 +31,22 @@ class Dialogs(private val listener: DialogListener) {
         llDollar.setOnClickListener {
             preferenceManager.kursDialogValyuta = 0
             setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-            setKursTypeToTV(preferenceManager, tvKursType, ivKursUpdate)
+         //   setKursTypeToTV(preferenceManager)
             listener.itemKursTypeDialogClick()
             kursTypeDialog.dismiss()
         }
         llRuble.setOnClickListener {
             preferenceManager.kursDialogValyuta = 1
             setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-            setKursTypeToTV(preferenceManager, tvKursType, ivKursUpdate)
+         //   setKursTypeToTV(preferenceManager)
             listener.itemKursTypeDialogClick()
             kursTypeDialog.dismiss()
         }
         llEuro.setOnClickListener {
             preferenceManager.kursDialogValyuta = 2
             setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-            setKursTypeToTV(preferenceManager, tvKursType, ivKursUpdate)
             listener.itemKursTypeDialogClick()
+            // setKursTypeToTV(preferenceManager)
             kursTypeDialog.dismiss()
         }
     }
@@ -78,25 +76,25 @@ class Dialogs(private val listener: DialogListener) {
         }
     }
 
-    private fun setKursTypeToTV(
-        preferenceManager: PreferencesManager,
-        tvKursType: AppCompatTextView,
-        ivKursUpdate: AppCompatImageView
-    ) {
-        when (preferenceManager.kursDialogValyuta) {
-            0 -> {
-                tvKursType.text = "Dollar"
-                ivKursUpdate.setImageResource(R.drawable.ic_kurs_dollar)
-            }
-            1 -> {
-                tvKursType.text = "Ruble"
-                ivKursUpdate.setImageResource(R.drawable.ic_kurs_ruble)
-            }
-            2 -> {
-                tvKursType.text = "Euro"
-                ivKursUpdate.setImageResource(R.drawable.ic_kurs_euro)
-            }
-        }
-    }
+//    private fun setKursTypeToTV(
+//        preferenceManager: PreferencesManager,
+//        tvKursType: AppCompatTextView,
+//        ivKursUpdate: AppCompatImageView
+//    ) {
+//        when (preferenceManager.kursDialogValyuta) {
+//            0 -> {
+//                tvKursType.text = "Dollar"
+//                ivKursUpdate.setImageResource(R.drawable.ic_kurs_dollar)
+//            }
+//            1 -> {
+//                tvKursType.text = "Ruble"
+//                ivKursUpdate.setImageResource(R.drawable.ic_kurs_ruble)
+//            }
+//            2 -> {
+//                tvKursType.text = "Euro"
+//                ivKursUpdate.setImageResource(R.drawable.ic_kurs_euro)
+//            }
+//        }
+//    }
     // Choose kurs type dialog logic //
 }

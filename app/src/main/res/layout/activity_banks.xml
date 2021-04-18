@@ -7,6 +7,27 @@
     android:background="@android:color/white"
     tools:context=".ui.banks.BanksActivity">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_progress"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        android:alpha="0.4"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_3sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -36,14 +57,16 @@
                     android:textColor="#263238"
                     android:textSize="@dimen/_17ssp" />
 
-<!--                <androidx.appcompat.widget.AppCompatImageView-->
-<!--                    android:id="@+id/iv_update_data"-->
-<!--                    android:layout_width="@dimen/_20sdp"-->
-<!--                    android:layout_height="@dimen/_20sdp"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_centerVertical="true"-->
-<!--                    android:layout_marginEnd="@dimen/_10sdp"-->
-<!--                    app:srcCompat="@drawable/update_valyuta" />-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_kurs_type_update"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:rotation="90"
+                    app:srcCompat="@drawable/ic_kurs_type"
+                    app:tint="@color/black" />
 
             </RelativeLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -58,12 +81,14 @@
 
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_cbu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="gone"
             app:cardBackgroundColor="#ECEFF1"
             app:cardCornerRadius="@dimen/_7sdp">
 
@@ -96,18 +121,18 @@
                         android:gravity="center_vertical"
                         android:text="Markaziy bank"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp" />
+                        android:textSize="@dimen/_15ssp" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_kurs_type_update"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="0.2"
-                        android:padding="@dimen/_10sdp"
-                        android:rotation="90"
-                        app:srcCompat="@drawable/ic_kurs_type"
-                        app:tint="@color/black" />
+                    <!--                    <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--                        android:id="@+id/iv_kurs_type_update"-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="@dimen/_40sdp"-->
+                    <!--                        android:layout_gravity="center_vertical"-->
+                    <!--                        android:layout_weight="0.2"-->
+                    <!--                        android:padding="@dimen/_10sdp"-->
+                    <!--                        android:rotation="90"-->
+                    <!--                        app:srcCompat="@drawable/ic_kurs_type"-->
+                    <!--                        app:tint="@color/black" />-->
 
                 </LinearLayout>
 
@@ -116,37 +141,55 @@
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cbu_usd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:alpha="0.3"
-                        android:text="Olish"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        app:fontFamily="@font/g_medium" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_kurs_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:alpha="0.3"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/g_medium"
-                        tools:text="Dollar" />
+                        tools:text="Olish" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cbu_rub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:alpha="0.3"
-                        android:text="Sotish"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        app:fontFamily="@font/g_medium" />
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="Sotish" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cbu_gbp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10510" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cbu_jpy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10430" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -156,35 +199,25 @@
                     android:layout_marginBottom="@dimen/_5sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_olish"
+                        android:id="@+id/tv_cbu_eur"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="10510"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        app:fontFamily="@font/g_medium" />
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="Dollar" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_sotish"
+                        android:id="@+id/tv_cbu_chf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:text="10430"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        app:fontFamily="@font/g_medium" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_kurs_type"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_centerInParent="true"
-                        android:padding="@dimen/_2sdp"
-                        app:srcCompat="@drawable/ic_kurs_dollar" />
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10430" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -201,6 +234,7 @@
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layoutAnimation="@anim/layout_animation"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </com.baoyz.widget.PullRefreshLayout>

@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baoyz.widget.PullRefreshLayout
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import uz.androbeck.kursvalyuta.adapter.MainAdapter
 import uz.androbeck.kursvalyuta.adapter.model.MainModel
 import uz.androbeck.kursvalyuta.databinding.ActivityMainBinding
 import uz.androbeck.kursvalyuta.utils.Helper
-import uz.androbeck.kursvalyuta.utils.Objects
 
 class MainActivity : AppCompatActivity(), MainAdapter.MainAdapterListener,
     PullRefreshLayout.OnRefreshListener {

@@ -15,7 +15,9 @@
         android:roundIcon="@drawable/ic_dollar"
         android:supportsRtl="true"
         android:theme="@style/Theme.KursValyuta"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="HardcodedDebugMode"
+        android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
