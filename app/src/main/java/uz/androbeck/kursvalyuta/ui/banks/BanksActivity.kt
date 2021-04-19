@@ -1,10 +1,12 @@
 package uz.androbeck.kursvalyuta.ui.banks
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.viewbinding.library.activity.viewBinding
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baoyz.widget.PullRefreshLayout
 import kotlinx.coroutines.*
@@ -14,8 +16,10 @@ import uz.androbeck.kursvalyuta.adapter.BanksAdapter
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ActivityBanksBinding
 import uz.androbeck.kursvalyuta.db.preferences.PreferencesManager
-import uz.androbeck.kursvalyuta.toast
+import uz.androbeck.kursvalyuta.ui.banks.item.ItemBankActivity
+import uz.androbeck.kursvalyuta.ui.connection.ConnectionActivity
 import uz.androbeck.kursvalyuta.ui.dialogs.Dialogs
+import uz.androbeck.kursvalyuta.utils.NetworkLiveData
 import uz.androbeck.kursvalyuta.visible
 
 @SuppressLint("SetTextI18n")
@@ -34,6 +38,8 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
     private val dataList = ArrayList<BanksModel>()
 
+    private lateinit var networkLiveData: NetworkLiveData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -44,14 +50,24 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
         clicks()
 
-        observeDataFromMarkaziyBank()
+        networkLiveData.observe(this, {
+            if (it != null) {
+                if (it) {
+                    observeDataFromMarkaziyBank()
 
-        observeDataFromAsakaBank()
+                    observeDataFromAsakaBank()
 
-        binding.cvProgress.visible(true)
+                    binding.cvProgress.visible(true)
+                } else
+                    startActivity(Intent(this, ConnectionActivity::class.java))
+            } else
+                startActivity(Intent(this, ConnectionActivity::class.java))
+        })
     }
 
     private fun init() {
+        networkLiveData = NetworkLiveData(this)
+
         preferenceManager = PreferencesManager(this)
 
         dialogs = Dialogs(this)
@@ -86,6 +102,15 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
                 val euroSale = elements[5].text()
                 val gbpBuy = elements[6].text()
                 val gbpSale = elements[7].text()
+                val chfBuy = elements[8].text()
+                val chfSale = elements[9].text()
+                val jpyBuy = elements[10].text()
+                val jpySale = elements[11].text()
+                val rubBuy = elements[12].text()
+                val rubSale = elements[13].text()
+                val usdAtmBuy = elements[14].text()
+                val usdAtmSale = elements[15].text()
+                println("$chfBuy | $chfSale | $jpyBuy | $jpySale | $rubBuy | $rubSale | $usdAtmBuy | $usdAtmSale")
                 dataList.add(
                     BanksModel(
                         banksLogo = R.drawable.asaka_bank_logo,
@@ -96,9 +121,16 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
                         saleEur = "$euroSale so'm",
                         buyGbp = "$gbpBuy so'm",
                         saleGbp = "$gbpSale so'm",
+                        buyChf = "$chfBuy so'm",
+                        saleChf = "$chfSale so'm",
+                        buyJpy = "$jpyBuy so'm",
+                        saleJpy = "$jpySale so'm",
+                        buyRub = "$rubBuy so'm",
+                        saleRub = "$rubSale so'm",
+                        buyUsdAtm = "$usdAtmBuy so'm",
+                        saleUsdAtm = "$usdAtmSale so'm"
                     )
                 )
-                //banksAdapter.submitList(dataList)
                 observeDataFromIpotekaBank()
             }
         })
@@ -168,7 +200,7 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
                 binding.cvCbu.visible(true)
                 binding.cvProgress.visible(false)
                 banksAdapter.submitList(dataList)
-                binding.rv.scheduleLayoutAnimation()
+                binding.refreshLayout.setRefreshing(false)
             }
         }
     }
@@ -190,18 +222,25 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
     }
 
     override fun itemClick(position: Int, data: BanksModel) {
-
+        binding.refreshLayout.setRefreshing(false)
+        val intent = Intent(this, ItemBankActivity::class.java)
+        intent.putExtra("data_intent", bundleOf("data" to data))
+        startActivity(intent)
     }
 
     override fun onRefresh() {
-        toast("Updated...")
         dataList.clear()
-        observeDataFromMarkaziyBank()
-        observeDataFromAsakaBank()
-        MainScope().launch {
-            delay(3000L)
-            binding.refreshLayout.setRefreshing(false)
-        }
+        networkLiveData.observe(this, {
+            if (it != null) {
+                if (it) {
+                    observeDataFromMarkaziyBank()
+
+                    observeDataFromAsakaBank()
+                } else
+                    startActivity(Intent(this, ConnectionActivity::class.java))
+            } else
+                startActivity(Intent(this, ConnectionActivity::class.java))
+        })
     }
 
     override fun itemKursTypeDialogClick() {

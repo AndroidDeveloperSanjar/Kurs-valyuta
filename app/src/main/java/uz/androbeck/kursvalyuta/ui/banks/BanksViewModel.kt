@@ -49,7 +49,8 @@ class BanksViewModel : ViewModel() {
     fun getKapitalBankValyuta(): LiveData<Elements?> = liveData {
         try {
             val element = withContext(IO) {
-                Objects.document("https://kapitalbank.uz/uz/welcome.php").getElementsByClass("items")
+                Objects.document("https://kapitalbank.uz/uz/welcome.php")
+                    .getElementsByClass("items")
             }
             emit(element)
         } catch (e: Exception) {

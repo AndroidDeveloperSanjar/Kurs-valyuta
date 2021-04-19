@@ -48,9 +48,9 @@ class NetworkLiveData constructor(
     }
 
     override fun onInactive() {
-        (context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager?)?.apply {
-            unregisterNetworkCallback(networkCallback)
-        }
+//        (context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager?)?.apply {
+//            unregisterNetworkCallback(networkCallback)
+//        }
         super.onInactive()
     }
 }

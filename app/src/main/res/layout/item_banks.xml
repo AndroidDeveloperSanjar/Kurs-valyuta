@@ -47,12 +47,13 @@
                     tools:text="Asaka bank" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_arrow_right"
+                    android:id="@+id/iv_arrow_down_and_up"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="0.2"
                     android:padding="@dimen/_5sdp"
+                    app:srcCompat="@drawable/ic_arrow_down"
                     app:tint="@color/black" />
 
             </LinearLayout>
@@ -211,6 +212,166 @@
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_all_valyuta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_buy_chf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10510 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sale_chf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10430 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_CHF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="CHF"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_buy_jpy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10510 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sale_jpy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10430 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_JPY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="JPY"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_buy_rub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10510 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sale_rub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10430 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_rub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="RUB"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_buy_usd_atm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10510 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sale_usd_atm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium"
+                        tools:text="10430 so'm" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_USD_ATM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="ATM"
+                        android:textSize="@dimen/_13ssp"
+                        app:fontFamily="@font/g_medium" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

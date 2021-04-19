@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_300sdp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_valyuta_calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/g_extra_bold"
+        android:text="Valyuta kalkulyator"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_valyuta_calculate"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:hint="Valyutani tanlang"
+        android:layout_marginEnd="@dimen/_10sdp">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:text="USD : 10500.00" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</RelativeLayout>

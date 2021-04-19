@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ui.banks.item.ItemBankActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:elevation="@dimen/_3sdp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:contentScrim="@color/white"
+            app:expandedTitleGravity="top"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:srcCompat="@drawable/ic_arrow_back"
+                    app:tint="@color/black" />
+
+                <View
+                    android:id="@+id/view_back_pressed"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="match_parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_bank_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/view_back_pressed"
+                    android:fontFamily="@font/g_black"
+                    android:textColor="#263238"
+                    android:textSize="@dimen/_17ssp"
+                    tools:text="Kurs valyuta" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:srcCompat="@drawable/ic_share"
+                    app:tint="@color/black" />
+
+                <View
+                    android:id="@+id/view_share"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toStartOf="@+id/view_share"
+                    app:srcCompat="@drawable/ic_calculate"
+                    app:tint="@color/black" />
+
+                <View
+                    android:id="@+id/view_calculator"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/view_share" />
+            </RelativeLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_usd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_usa"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/usd" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_usd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/iv_usa"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="USD -> AQSH dollari"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15ssp"
+                            app:fontFamily="@font/g_semi_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_usd_buy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish : 10470.00 so'm" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_usd_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish : 10470.00 so'm" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/ll_usd"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#B0BEC5" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_eur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_eur"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/euro" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_eur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/iv_eur"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="EUR -> Yevro"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15ssp"
+                            app:fontFamily="@font/g_semi_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_eur_buy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish : 10470.00 so'm" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_eur_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish : 10470.00 so'm" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/ll_eur"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#B0BEC5" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_gbp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_gbp"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/gbp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_gbp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/iv_gbp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GBP -> Angliya funt sterlingi"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15ssp"
+                            app:fontFamily="@font/g_semi_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_gbp_buy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish : 10470.00 so'm" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_gbp_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish : 10470.00 so'm" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/ll_gbp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#B0BEC5" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_chf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_chf"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/chf" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_chf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/iv_chf"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CHF -> Shveytsariya franki"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15ssp"
+                            app:fontFamily="@font/g_semi_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_chf_buy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish : 10470.00 so'm" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_chf_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish : 10470.00 so'm" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/ll_chf"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#B0BEC5" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_jpy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_jpy"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/jpy" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_jpy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/iv_jpy"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="JPY -> Yaponiya iyenasi"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15ssp"
+                            app:fontFamily="@font/g_semi_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_jpy_buy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish : 10470.00 so'm" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_jpy_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish : 10470.00 so'm" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/ll_jpy"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#B0BEC5" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_rub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_rub"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/rub" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_rub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/iv_rub"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RUB -> Rossiya rubli"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15ssp"
+                            app:fontFamily="@font/g_semi_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_rub_buy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish : 10470.00 so'm" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_rub_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish : 10470.00 so'm" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/ll_rub"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#B0BEC5" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

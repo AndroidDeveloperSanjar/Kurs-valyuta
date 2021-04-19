@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/_10sdp"
+    android:layout_width="match_parent"
+    android:fontFamily="@font/g_medium"
+    android:textSize="@dimen/_13ssp"
+    tools:text="USD : 10500"
+    android:layout_height="match_parent">
+
+</androidx.appcompat.widget.AppCompatTextView>

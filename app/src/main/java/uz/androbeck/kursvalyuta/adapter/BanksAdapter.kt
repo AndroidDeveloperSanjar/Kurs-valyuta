@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.load
+import uz.androbeck.kursvalyuta.R
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ItemBanksBinding
+import uz.androbeck.kursvalyuta.visible
 
 @SuppressLint("SetTextI18n")
 class BanksAdapter(
@@ -26,6 +28,8 @@ class BanksAdapter(
     override fun onBindViewHolder(holder: BanksViewHolder, position: Int) {
         holder.bind()
     }
+
+    private var isDown = false
 
     inner class BanksViewHolder
     constructor(
@@ -51,6 +55,24 @@ class BanksAdapter(
                 tvSaleEur.text = data.saleEur
                 tvBuyGbp.text = data.buyGbp
                 tvSaleGbp.text = data.saleGbp
+                tvBuyChf.text = data.buyChf
+                tvSaleChf.text = data.saleChf
+                tvBuyJpy.text = data.buyJpy
+                tvSaleJpy.text = data.saleJpy
+                tvBuyRub.text = data.buyRub
+                tvSaleRub.text = data.buyRub
+                tvBuyUsdAtm.text = data.buyUsdAtm
+                tvSaleUsdAtm.text = data.saleUsdAtm
+                ivArrowDownAndUp.setOnClickListener {
+                    isDown = !isDown
+                    if (isDown) {
+                        ivArrowDownAndUp.setImageResource(R.drawable.ic_arrow_up)
+                        llAllValyuta.visible(true)
+                    } else {
+                        ivArrowDownAndUp.setImageResource(R.drawable.ic_arrow_down)
+                        llAllValyuta.visible(false)
+                    }
+                }
                 if (adapterPosition != RecyclerView.NO_POSITION)
                     root.setOnClickListener {
                         listener.itemClick(adapterPosition, data)
