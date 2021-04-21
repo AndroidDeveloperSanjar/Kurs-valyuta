@@ -49,20 +49,62 @@ class BanksAdapter(
                     crossfade(1000)
                 }
                 tvBankName.text = data.bankName
-                tvBuyUsd.text = data.buyUsd
-                tvSaleUsd.text = data.saleUsd
-                tvBuyEur.text = data.buyEur
-                tvSaleEur.text = data.saleEur
-                tvBuyGbp.text = data.buyGbp
-                tvSaleGbp.text = data.saleGbp
-                tvBuyChf.text = data.buyChf
-                tvSaleChf.text = data.saleChf
-                tvBuyJpy.text = data.buyJpy
-                tvSaleJpy.text = data.saleJpy
-                tvBuyRub.text = data.buyRub
-                tvSaleRub.text = data.buyRub
-                tvBuyUsdAtm.text = data.buyUsdAtm
-                tvSaleUsdAtm.text = data.saleUsdAtm
+                if (data.buyUsd == "" && data.saleUsd == "")
+                    rlUsd.visible(false)
+                else {
+                    rlUsd.visible(true)
+                    tvBuyUsd.text = data.buyUsd
+                    tvSaleUsd.text = data.saleUsd
+                }
+                if (data.buyEur == "" && data.saleEur == "")
+                    rlEur.visible(false)
+                else {
+                    rlEur.visible(true)
+                    tvBuyEur.text = data.buyEur
+                    tvSaleEur.text = data.saleEur
+                }
+                if (data.buyGbp == "" && data.saleGbp == "")
+                    rlGbp.visible(false)
+                else {
+                    rlGbp.visible(true)
+                    tvBuyGbp.text = data.buyGbp
+                    tvSaleGbp.text = data.saleGbp
+                }
+                if (data.buyChf == "" && data.saleChf == "")
+                    rlChf.visible(false)
+                else {
+                    rlChf.visible(true)
+                    tvBuyChf.text = data.buyChf
+                    tvSaleChf.text = data.saleChf
+                }
+                if (data.buyJpy == "" && data.saleJpy == "")
+                    rlJpy.visible(false)
+                else {
+                    rlJpy.visible(true)
+                    tvBuyJpy.text = data.buyJpy
+                    tvSaleJpy.text = data.saleJpy
+                }
+                if (data.buyRub == "" && data.saleRub == "")
+                    rlRub.visible(false)
+                else {
+                    rlRub.visible(true)
+                    tvBuyRub.text = data.buyRub
+                    tvSaleRub.text = data.buyRub
+                }
+                if (data.buyUsdAtm == "" && data.saleUsdAtm == "")
+                    rlUsdAtm.visible(false)
+                else {
+                    rlUsdAtm.visible(true)
+                    tvBuyUsdAtm.text = data.buyUsdAtm
+                    tvSaleUsdAtm.text = data.saleUsdAtm
+                }
+                if (data.buyChf == "" && data.saleChf == ""
+                    && data.buyJpy == "" && data.saleJpy == ""
+                    && data.buyRub == "" && data.saleRub == ""
+                )
+                    ivArrowDownAndUp.visible(false)
+                else
+                    ivArrowDownAndUp.visible(true)
                 ivArrowDownAndUp.setOnClickListener {
                     isDown = !isDown
                     if (isDown) {

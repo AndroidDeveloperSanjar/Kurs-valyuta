@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_300sdp">
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_valyuta_calculate"
@@ -16,14 +17,19 @@
         android:textSize="@dimen/_15ssp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tit_one"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_valyuta_calculate"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:hint="Valyutani tanlang"
-        android:layout_marginEnd="@dimen/_10sdp">
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:hint="Valyutani kursini tanlash"
+        android:textColorHint="@android:color/black"
+        app:boxStrokeColor="@color/black"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@android:color/black">
 
         <AutoCompleteTextView
             android:id="@+id/auto_complete_tv"
@@ -33,7 +39,74 @@
             android:inputType="none"
             android:paddingTop="@dimen/_16sdp"
             android:paddingBottom="@dimen/_16sdp"
-            android:text="USD : 10500.00" />
+            android:text="Valyuta kursini tanlang"
+            android:textSize="@dimen/_11ssp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tit_two"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tit_one"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:hint="Valyuta kiriting"
+        android:textColorHint="@android:color/black"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@android:color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_input_sum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTint="@color/black"
+            android:inputType="number"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:textSize="@dimen/_11ssp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tit_two"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Natijani ko'rish"
+        android:textSize="@dimen/_13ssp"
+        app:fontFamily="@font/g_extra_bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_result"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_close"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="0.5"
+            android:text="Yopish"
+            app:backgroundTint="@android:color/holo_red_dark" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_calculate"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="0.5"
+            android:text="Hisoblash"
+            app:backgroundTint="@color/purple_700" />
+    </LinearLayout>
 
 </RelativeLayout>

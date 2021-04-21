@@ -140,7 +140,7 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
         viewModel.getIpotekaBankValyuta().observe(this, { elements ->
             if (elements != null) {
                 val buyUsd =
-                    elements[0].getElementsByClass("purchase")[0].getElementsByClass("corrupt")
+                    elements[0].getElementsByClass("purchase")[0].getElementsByClass("corrupt")[0]
                         .text()
                 val saleUsd =
                     elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[0].text()
@@ -152,6 +152,7 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
                     elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[2].text()
                 val saleGbp =
                     elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[2].text()
+                println("djkal -> $buyUsd")
                 dataList.add(
                     BanksModel(
                         banksLogo = R.drawable.ipoteka_bank_logo,

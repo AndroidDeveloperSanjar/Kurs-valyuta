@@ -99,6 +99,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_usd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp">
@@ -137,6 +138,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@id/rl_eur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp">
@@ -175,6 +177,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_gbp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -221,6 +224,7 @@
                 android:visibility="gone">
 
                 <RelativeLayout
+                    android:id="@+id/rl_chf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -258,6 +262,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_jpy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp">
@@ -296,6 +301,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_rub"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp">
@@ -334,6 +340,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_usd_atm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
