@@ -10,8 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baoyz.widget.PullRefreshLayout
 import kotlinx.coroutines.*
-import uz.androbeck.kursvalyuta.DialogListener
-import uz.androbeck.kursvalyuta.R
+import uz.androbeck.kursvalyuta.*
 import uz.androbeck.kursvalyuta.adapter.BanksAdapter
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ActivityBanksBinding
@@ -20,7 +19,6 @@ import uz.androbeck.kursvalyuta.ui.banks.item.ItemBankActivity
 import uz.androbeck.kursvalyuta.ui.connection.ConnectionActivity
 import uz.androbeck.kursvalyuta.ui.dialogs.Dialogs
 import uz.androbeck.kursvalyuta.utils.NetworkLiveData
-import uz.androbeck.kursvalyuta.visible
 
 @SuppressLint("SetTextI18n")
 class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
@@ -40,6 +38,8 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
     private lateinit var networkLiveData: NetworkLiveData
 
+    private var isLoaded = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -57,7 +57,15 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
                     observeDataFromAsakaBank()
 
-                    binding.cvProgress.visible(true)
+                    observeDataFromIpotekaBank()
+
+                    observeDataFromKapitalBank()
+
+                    observeQishloqQurilishBank()
+
+                    observeSanoatQurilishBank()
+
+                    binding.progressBar.visible(true)
                 } else
                     startActivity(Intent(this, ConnectionActivity::class.java))
             } else
@@ -80,6 +88,8 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
 
     private fun observeDataFromMarkaziyBank() {
         with(binding) {
+            progressBar.visible(true)
+            isLoaded = false
             viewModel.getMarkaziyBankValyuta().observe(this@BanksActivity, { elements ->
                 if (elements != null) {
                     tvCbuUsd.text = elements[0].text()
@@ -88,128 +98,204 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
                     tvCbuGbp.text = elements[3].text()
                     tvCbuJpy.text = elements[4].text()
                     tvCbuChf.text = elements[5].text()
+                    progressBar.visible(false)
+                    cvCbu.visible(true)
+                    isLoaded = true
+                } else {
+                    progressBar.visible(false)
+                    isLoaded = true
                 }
             })
         }
     }
 
     private fun observeDataFromAsakaBank() {
-        viewModel.getAsakaBankValyuta().observe(this, { elements ->
-            if (elements != null) {
-                val dollarBuy = elements[2].text()
-                val dollarSale = elements[3].text()
-                val euroBuy = elements[4].text()
-                val euroSale = elements[5].text()
-                val gbpBuy = elements[6].text()
-                val gbpSale = elements[7].text()
-                val chfBuy = elements[8].text()
-                val chfSale = elements[9].text()
-                val jpyBuy = elements[10].text()
-                val jpySale = elements[11].text()
-                val rubBuy = elements[12].text()
-                val rubSale = elements[13].text()
-                val usdAtmBuy = elements[14].text()
-                val usdAtmSale = elements[15].text()
-                println("$chfBuy | $chfSale | $jpyBuy | $jpySale | $rubBuy | $rubSale | $usdAtmBuy | $usdAtmSale")
-                dataList.add(
-                    BanksModel(
-                        banksLogo = R.drawable.asaka_bank_logo,
-                        bankName = "Asaka bank",
-                        buyUsd = "$dollarBuy so'm",
-                        saleUsd = "$dollarSale so'm",
-                        buyEur = "$euroBuy so'm",
-                        saleEur = "$euroSale so'm",
-                        buyGbp = "$gbpBuy so'm",
-                        saleGbp = "$gbpSale so'm",
-                        buyChf = "$chfBuy so'm",
-                        saleChf = "$chfSale so'm",
-                        buyJpy = "$jpyBuy so'm",
-                        saleJpy = "$jpySale so'm",
-                        buyRub = "$rubBuy so'm",
-                        saleRub = "$rubSale so'm",
-                        buyUsdAtm = "$usdAtmBuy so'm",
-                        saleUsdAtm = "$usdAtmSale so'm"
+        with(binding) {
+            progressBar.visible(true)
+            isLoaded = false
+            viewModel.getAsakaBankValyuta().observe(this@BanksActivity, { elements ->
+                if (elements != null) {
+                    val buyUsd = elements[2].text()
+                    val saleUsd = elements[3].text()
+                    val buyEur = elements[4].text()
+                    val saleEur = elements[5].text()
+                    val buyGbp = elements[6].text()
+                    val saleGbp = elements[7].text()
+                    val buyChf = elements[8].text()
+                    val saleChf = elements[9].text()
+                    val buyJpy = elements[10].text()
+                    val saleJby = elements[11].text()
+                    val buyRub = elements[12].text()
+                    val saleRub = elements[13].text()
+                    val buyUsdAtm = elements[14].text()
+                    val saleUsdAtm = elements[15].text()
+                    dataList.add(
+                        BanksModel(
+                            banksLogo = R.drawable.asaka_bank_logo,
+                            bankName = "Asaka bank",
+                            buyUsd = buyUsd.replace(" ", "").substring(0, 5),
+                            saleUsd = saleUsd.replace(" ", "").substring(0, 5),
+                            buyEur = buyEur.replace(" ", "").substring(0, 5),
+                            saleEur = saleEur.replace(" ", "").substring(0, 5),
+                            buyGbp = buyGbp.replace(" ", "").substring(0, 5),
+                            saleGbp = saleGbp.replace(" ", "").substring(0, 5),
+                            buyChf = buyChf.replace(" ", "").substring(0, 5),
+                            saleChf = saleChf.replace(" ", "").substring(0, 5),
+                            buyJpy = buyJpy.substring(0, 3).replace(",", ""),
+                            saleJpy = saleJby.substring(0, 3).replace(",", ""),
+                            buyRub = buyRub.substring(0, 3).replace(",", ""),
+                            saleRub = saleRub.substring(0, 3).replace(",", ""),
+                            buyUsdAtm = buyUsdAtm.replace(" ", "").substring(0, 5),
+                            saleUsdAtm = saleUsdAtm.replace(" ", "").substring(0, 5)
+                        )
                     )
-                )
-                observeDataFromIpotekaBank()
-            }
-        })
+                    banksAdapter.submitList(dataList)
+                    banksAdapter.notifyDataSetChanged()
+                    progressBar.visible(false)
+                    isLoaded = true
+                } else {
+                    progressBar.visible(false)
+                    isLoaded = true
+                }
+            })
+        }
     }
 
     private fun observeDataFromIpotekaBank() {
-        viewModel.getIpotekaBankValyuta().observe(this, { elements ->
-            if (elements != null) {
-                val buyUsd =
-                    elements[0].getElementsByClass("purchase")[0].getElementsByClass("corrupt")[0]
-                        .text()
-                val saleUsd =
-                    elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[0].text()
-                val buyEur =
-                    elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[1].text()
-                val saleEur =
-                    elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[1].text()
-                val buyGbp =
-                    elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[2].text()
-                val saleGbp =
-                    elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[2].text()
-                println("djkal -> $buyUsd")
-                dataList.add(
-                    BanksModel(
-                        banksLogo = R.drawable.ipoteka_bank_logo,
-                        bankName = "Ipoteka bank",
-                        buyUsd = "$buyUsd so'm",
-                        saleUsd = "$saleUsd so'm",
-                        buyEur = "$buyEur so'm",
-                        saleEur = "$saleEur so'm",
-                        buyGbp = "$buyGbp so'm",
-                        saleGbp = "$saleGbp so'm",
+        with(binding) {
+            progressBar.visible(true)
+            isLoaded = false
+            viewModel.getIpotekaBankValyuta().observe(this@BanksActivity, { elements ->
+                if (elements != null) {
+                    val buyUsd =
+                        elements[0].getElementsByClass("purchase")[0].getElementsByClass("corrupt")[0]
+                            .text()
+                    val saleUsd =
+                        elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[0].text()
+                    val buyEur =
+                        elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[1].text()
+                    val saleEur =
+                        elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[1].text()
+                    val buyGbp =
+                        elements[0].getElementsByClass("purchase")[0].getElementsByTag("span")[2].text()
+                    val saleGbp =
+                        elements[0].getElementsByClass("purchase")[1].getElementsByTag("span")[2].text()
+                    println("djkal -> $buyUsd")
+                    dataList.add(
+                        BanksModel(
+                            banksLogo = R.drawable.ipoteka_bank_logo,
+                            bankName = "Ipoteka bank",
+                            buyUsd = buyUsd.substring(0, 5).replace(" ", ""),
+                            saleUsd = saleUsd.substring(0, 5).replace(" ", ""),
+                            buyEur = buyEur.substring(0, 5).replace(" ", ""),
+                            saleEur = saleEur.substring(0, 5).replace(" ", ""),
+                            buyGbp = buyGbp.substring(0, 5).replace(" ", ""),
+                            saleGbp = saleGbp.substring(0, 5).replace(" ", "")
+                        )
                     )
-                )
-                observeDataFromKapitalBank()
-            }
-        })
+                    banksAdapter.submitList(dataList)
+                    banksAdapter.notifyDataSetChanged()
+                    progressBar.visible(false)
+                    isLoaded = true
+                } else {
+                    progressBar.visible(false)
+                    isLoaded = true
+                }
+            })
+        }
     }
 
     private fun observeDataFromKapitalBank() {
-        viewModel.getKapitalBankValyuta().observe(this) { elements ->
-            if (elements != null) {
-                val buyUsd =
-                    elements[0].getElementsByClass("item-desc")[0].getElementsByTag("span")[0].text()
-                val saleUsd =
-                    elements[0].getElementsByClass("item-desc")[0].getElementsByTag("span")[2].text()
-                val buyEur =
-                    elements[0].getElementsByClass("item-desc")[1].getElementsByTag("span")[0].text()
-                val saleEur =
-                    elements[0].getElementsByClass("item-desc")[1].getElementsByTag("span")[2].text()
-                val buyGbp =
-                    elements[0].getElementsByClass("item-desc")[2].getElementsByTag("span")[0].text()
-                val saleGbp =
-                    elements[0].getElementsByClass("item-desc")[2].getElementsByTag("span")[2].text()
-                dataList.add(
-                    BanksModel(
-                        banksLogo = R.drawable.kapital_bank_logo,
-                        bankName = "Kapital bank",
-                        buyUsd = "$buyUsd so'm",
-                        saleUsd = "$saleUsd so'm",
-                        buyEur = "$buyEur so'm",
-                        saleEur = "$saleEur so'm",
-                        buyGbp = "$buyGbp so'm",
-                        saleGbp = "$saleGbp so'm",
+        with(binding) {
+            progressBar.visible(true)
+            isLoaded = false
+            viewModel.getKapitalBankValyuta().observe(this@BanksActivity) { elements ->
+                if (elements != null) {
+                    val buyUsd =
+                        elements[0].getElementsByClass("item-desc")[0].getElementsByTag("span")[0].text()
+                    val saleUsd =
+                        elements[0].getElementsByClass("item-desc")[0].getElementsByTag("span")[2].text()
+                    val buyEur =
+                        elements[0].getElementsByClass("item-desc")[1].getElementsByTag("span")[0].text()
+                    val saleEur =
+                        elements[0].getElementsByClass("item-desc")[1].getElementsByTag("span")[2].text()
+                    val buyGbp =
+                        elements[0].getElementsByClass("item-desc")[2].getElementsByTag("span")[0].text()
+                    val saleGbp =
+                        elements[0].getElementsByClass("item-desc")[2].getElementsByTag("span")[2].text()
+                    val buyRub =
+                        elements[0].getElementsByClass("item-desc")[3].getElementsByTag("span")[0].text()
+                    val saleRub =
+                        elements[0].getElementsByClass("item-desc")[3].getElementsByTag("span")[2].text()
+                    dataList.add(
+                        BanksModel(
+                            banksLogo = R.drawable.kapital_bank_logo,
+                            bankName = "Kapital bank",
+                            buyUsd = buyUsd.substring(0, 5).replace(" ", ""),
+                            saleUsd = saleUsd.substring(0, 5).replace(" ", ""),
+                            buyEur = buyEur.substring(0, 5).replace(" ", ""),
+                            saleEur = saleEur.substring(0, 5).replace(" ", ""),
+                            buyGbp = buyGbp.substring(0, 5).replace(" ", ""),
+                            saleGbp = saleGbp.substring(0, 5).replace(" ", ""),
+                            buyRub = buyRub.substring(0, 3).replace(",", ""),
+                            saleRub = saleRub.substring(0, 3).replace(",", "")
+                        )
                     )
-                )
-                println(dataList)
-                binding.cvCbu.visible(true)
-                binding.cvProgress.visible(false)
-                banksAdapter.submitList(dataList)
-                binding.refreshLayout.setRefreshing(false)
+                    banksAdapter.submitList(dataList)
+                    banksAdapter.notifyDataSetChanged()
+                    isLoaded = true
+                    progressBar.visible(false)
+                } else {
+                    isLoaded = true
+                    progressBar.visible(false)
+                }
             }
+        }
+    }
+
+    private fun observeQishloqQurilishBank() {
+        println("jdksajdakl")
+        with(binding) {
+            progressBar.visible(true)
+            isLoaded = false
+            viewModel.getQishloqQurilishBankValyuta().observe(this@BanksActivity, { elements ->
+              if (elements != null){
+                  println(elements.text())
+                  //banksAdapter.submitList(dataList)
+                  //banksAdapter.notifyDataSetChanged()
+                  //isLoaded = true
+                  //progressBar.visible(false)
+              }else{
+                  isLoaded = true
+                  progressBar.visible(false)
+              }
+            })
+        }
+    }
+
+    private fun observeSanoatQurilishBank() {
+        with(binding) {
+            progressBar.visible(true)
+            isLoaded = false
+            viewModel.getSanoatQurilishBankValyuta().observe(this@BanksActivity, { elements ->
+                if (elements != null) {
+                    println(elements.text())
+                    //banksAdapter.submitList(dataList)
+                    //banksAdapter.notifyDataSetChanged()
+                    //isLoaded = true
+                    //progressBar.visible(false)
+                } else {
+                    isLoaded = true
+                    progressBar.visible(false)
+                }
+            })
         }
     }
 
     private fun clicks() {
         with(binding) {
             ivKursTypeUpdate.setOnClickListener {
-                dialogs.showDialog(this@BanksActivity, preferenceManager)
+                dialogs.showDialog(this@BanksActivity)
             }
         }
     }
@@ -223,10 +309,14 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
     }
 
     override fun itemClick(position: Int, data: BanksModel) {
-        binding.refreshLayout.setRefreshing(false)
-        val intent = Intent(this, ItemBankActivity::class.java)
-        intent.putExtra("data_intent", bundleOf("data" to data))
-        startActivity(intent)
+        if (isLoaded) {
+            binding.refreshLayout.setRefreshing(false)
+            val intent = Intent(this, ItemBankActivity::class.java)
+            intent.putExtra("data_intent", bundleOf("data" to data))
+            startActivity(intent)
+        } else {
+            binding.root.snackbar("Iltimos ma'lumotlar yuklanib bo'lishini kuting!")
+        }
     }
 
     override fun onRefresh() {
@@ -244,7 +334,69 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener,
         })
     }
 
-    override fun itemKursTypeDialogClick() {
+    override fun itemBuyOrSaleValyutaDialogClick(buyOrSale: String) {
+        dialogs.showBuyAndSaleAllValyutaDialog(this, buyOrSale)
+    }
 
+    override fun itemAllKursTypeDialogClick(buyOrSale: String, typeKursValyuta: String) {
+        toast("$buyOrSale | $typeKursValyuta", true)
+        when (buyOrSale) {
+            "buy" -> {
+                when (typeKursValyuta) {
+                    "usd" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyUsd.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "eur" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyEur.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "gbp" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyGbp.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "chf" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyChf.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "jpy" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyJpy.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "rub" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyRub.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+            "sale" -> {
+                when (typeKursValyuta) {
+                    "usd" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.saleUsd.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "eur" -> {
+                        banksAdapter.submitList(dataList.sortedByDescending { it.saleEur.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "gbp" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.saleGbp.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "chf" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.saleChf.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "jpy" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.saleJpy.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                    "rub" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.saleRub.toInt() })
+                        banksAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        }
     }
 }

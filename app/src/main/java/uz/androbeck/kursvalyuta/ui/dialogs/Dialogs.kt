@@ -6,20 +6,23 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import uz.androbeck.kursvalyuta.DialogListener
 import uz.androbeck.kursvalyuta.R
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
-import uz.androbeck.kursvalyuta.db.preferences.PreferencesManager
+import uz.androbeck.kursvalyuta.hideKeyBoard
 import uz.androbeck.kursvalyuta.toast
+import uz.androbeck.kursvalyuta.utils.Helper
+import java.text.DecimalFormat
 
 @SuppressLint("SetTextI18n")
 class Dialogs(private val listener: DialogListener? = null) {
 
-    // Calculate valyuta
+    // Calculate valyuta /////////////////////////////////////////////////////////////////////////////////////////////////////
     @SuppressLint("UseCompatLoadingForDrawables")
     fun calculateDialog(
         activity: Activity,
@@ -36,6 +39,7 @@ class Dialogs(private val listener: DialogListener? = null) {
         val btnClose = view.findViewById<MaterialButton>(R.id.btn_close)
         val btnCalculate = view.findViewById<MaterialButton>(R.id.btn_calculate)
         val tvResult = view.findViewById<AppCompatTextView>(R.id.tv_result)
+        val ivFlag = view.findViewById<AppCompatImageView>(R.id.iv_flag)
         val arrayAdapter = ArrayAdapter(
             activity,
             R.layout.drop_down_item,
@@ -43,241 +47,138 @@ class Dialogs(private val listener: DialogListener? = null) {
         )
         autoComplete.setAdapter(arrayAdapter)
         autoComplete.setOnItemClickListener { _, _, position, _ ->
-            setEndDrawable(position, activity, etInputSum)
+            setEndDrawable(position, ivFlag)
         }
+        autoComplete.threshold = 1
         btnClose.setOnClickListener {
             kursTypeDialog.dismiss()
         }
+        autoComplete.setOnClickListener {
+            activity.hideKeyBoard(it)
+        }
         btnCalculate.setOnClickListener {
-            var kurs = ""
-            when (data.bankName) {
-                "Asaka bank" -> {
-                    kurs =
-                        autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 7)
-                            .replace(" ", "")
-                }
-                else -> {
-                    kurs =
-                        autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 4)
-                }
-            }
+            val kurs = autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 4)
             val inputSum = etInputSum.text.toString().trim()
-            //val result = kurs.toInt() * inputSum
-            if (inputSum.isNotEmpty()) {
+            if (inputSum.isNotEmpty() && autoComplete.text.toString() != "Valyuta kursini tanlang") {
                 val inputSumInt = inputSum.toInt()
                 val kursInt = kurs.toInt()
                 val result = kursInt * inputSumInt
-                tvResult.text = "Qiymat : $result so'm"
+                tvResult.text = "Qiymat : ${Helper.formatNumber(result)} so'm"
             } else
                 activity.toast("Iltimos maydonni to'ldiring")
-            //println(inputSum)
+
         }
     }
 
-    private fun setEndDrawable(position: Int, activity: Activity, etInputSum: TextInputEditText) {
+    private fun setEndDrawable(
+        position: Int,
+        ivFlag: AppCompatImageView
+    ) {
         when (position) {
-            0 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_dollar)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            1 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_dollar)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            2 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_svg_euro_24)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            3 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_svg_euro_24)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            4 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_gmp_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            5 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_gmp_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            6 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_chf_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            7 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_chf_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            8 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_jpy_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            9 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_jpy_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            10 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_rub_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
-            11 -> {
-                val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_rub_svg)
-                etInputSum.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    null,
-                    null,
-                    drawable,
-                    null
-                )
-            }
+            0 -> ivFlag.setImageResource(R.drawable.ic_united_states_flag)
+            1 -> ivFlag.setImageResource(R.drawable.ic_united_states_flag)
+            2 -> ivFlag.setImageResource(R.drawable.ic_europe_flag)
+            3 -> ivFlag.setImageResource(R.drawable.ic_europe_flag)
+            4 -> ivFlag.setImageResource(R.drawable.ic_england_flag)
+            5 -> ivFlag.setImageResource(R.drawable.ic_england_flag)
+            6 -> ivFlag.setImageResource(R.drawable.ic_switzerland_flag)
+            7 -> ivFlag.setImageResource(R.drawable.ic_switzerland_flag)
+            8 -> ivFlag.setImageResource(R.drawable.ic_japan_flag)
+            9 -> ivFlag.setImageResource(R.drawable.ic_japan_flag)
+            10 -> ivFlag.setImageResource(R.drawable.ic_russia_flag)
+            11 -> ivFlag.setImageResource(R.drawable.ic_russia_flag)
         }
     }
 
     private fun stringArray(data: BanksModel): ArrayList<String> {
         val stringArray = ArrayList<String>()
-        if (data.buyUsd != "" && data.saleUsd != "") {
-            stringArray.add("USD olish  : ${data.buyUsd}")
-            stringArray.add("USD sotish : ${data.saleUsd}")
+        if (data.buyUsd != "0" && data.saleUsd != "0") {
+            stringArray.add("USD olish  : ${data.buyUsd} so'm")
+            stringArray.add("USD sotish : ${data.saleUsd} so'm")
         }
-        if (data.buyEur != "" && data.saleEur != "") {
-            stringArray.add("EUR olish  : ${data.buyEur}")
-            stringArray.add("EUR sotish : ${data.saleEur}")
+        if (data.buyEur != "0" && data.saleEur != "0") {
+            stringArray.add("EUR olish  : ${data.buyEur} so'm")
+            stringArray.add("EUR sotish : ${data.saleEur} so'm")
         }
-        if (data.buyGbp != "" && data.saleGbp != "") {
-            stringArray.add("GBP  olish  : ${data.buyGbp}")
-            stringArray.add("GBP sotish : ${data.saleGbp}")
+        if (data.buyGbp != "0" && data.saleGbp != "0") {
+            stringArray.add("GBP  olish  : ${data.buyGbp} so'm")
+            stringArray.add("GBP sotish : ${data.saleGbp} so'm")
         }
-        if (data.buyChf != "" && data.saleChf != "") {
-            stringArray.add("CHF olish  : ${data.buyChf}")
-            stringArray.add("CHF sotish : ${data.saleChf}")
+        if (data.buyChf != "0" && data.saleChf != "0") {
+            stringArray.add("CHF olish  : ${data.buyChf} so'm")
+            stringArray.add("CHF sotish : ${data.saleChf} so'm")
         }
-        if (data.buyJpy != "" && data.saleJpy != "") {
-            stringArray.add("JPY olish  : ${data.buyJpy}")
-            stringArray.add("JPY sotish : ${data.saleJpy}")
+        if (data.buyJpy != "0" && data.saleJpy != "0") {
+            stringArray.add("JPY olish  : ${data.buyJpy} so'm")
+            stringArray.add("JPY sotish : ${data.saleJpy} so'm")
         }
-        if (data.buyRub != "" && data.saleRub != "") {
-            stringArray.add("RUB olish  : ${data.buyRub}")
-            stringArray.add("RUB sotish : ${data.saleRub}")
+        if (data.buyRub != "0" && data.saleRub != "0") {
+            stringArray.add("RUB olish  : ${data.buyRub} so'm")
+            stringArray.add("RUB sotish : ${data.saleRub} so'm")
         }
         return stringArray
     }
-    // Calculate valyuta
+    // Calculate valyuta /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Choose kurs type dialog logic //
+    // Choose buy and sale valyuta //////////////////////////////////////////////////////////////////////////////////////////
     fun showDialog(
-        activity: Activity,
-        preferenceManager: PreferencesManager
+        activity: Activity
     ) {
         val builder = AlertDialog.Builder(activity)
         val view = activity.layoutInflater.inflate(R.layout.dialog_kurs_type_fragment, null)
         builder.setView(view)
         val kursTypeDialog = builder.create()
         kursTypeDialog.show()
-        val llDollar = view.findViewById<LinearLayout>(R.id.ll_dollar)
-        val llRuble = view.findViewById<LinearLayout>(R.id.ll_ruble)
-        val llEuro = view.findViewById<LinearLayout>(R.id.ll_euro)
-        setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-        llDollar.setOnClickListener {
-            preferenceManager.kursDialogValyuta = 0
-            setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-            //   setKursTypeToTV(preferenceManager)
-            listener?.itemKursTypeDialogClick()
+        val llBuy = view.findViewById<LinearLayout>(R.id.ll_buy)
+        val llSale = view.findViewById<LinearLayout>(R.id.ll_sale)
+        llBuy.setOnClickListener {
+            listener?.itemBuyOrSaleValyutaDialogClick("buy")
             kursTypeDialog.dismiss()
         }
-        llRuble.setOnClickListener {
-            preferenceManager.kursDialogValyuta = 1
-            setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-            //   setKursTypeToTV(preferenceManager)
-            listener?.itemKursTypeDialogClick()
-            kursTypeDialog.dismiss()
-        }
-        llEuro.setOnClickListener {
-            preferenceManager.kursDialogValyuta = 2
-            setBackgroundLL(preferenceManager, llDollar, llEuro, llRuble)
-            listener?.itemKursTypeDialogClick()
-            // setKursTypeToTV(preferenceManager)
+        llSale.setOnClickListener {
+            listener?.itemBuyOrSaleValyutaDialogClick("sale")
             kursTypeDialog.dismiss()
         }
     }
+    // Choose buy and sale valyuta //////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun setBackgroundLL(
-        preferenceManager: PreferencesManager,
-        llDollar: LinearLayout,
-        llEuro: LinearLayout,
-        llRuble: LinearLayout
-    ) {
-        when (preferenceManager.kursDialogValyuta) {
-            0 -> {
-                llDollar.setBackgroundResource(R.color.m_color)
-                llEuro.setBackgroundResource(R.color.white)
-                llRuble.setBackgroundResource(R.color.white)
-            }
-            1 -> {
-                llRuble.setBackgroundResource(R.color.m_color)
-                llDollar.setBackgroundResource(R.color.white)
-                llEuro.setBackgroundResource(R.color.white)
-            }
-            2 -> {
-                llEuro.setBackgroundResource(R.color.m_color)
-                llRuble.setBackgroundResource(R.color.white)
-                llDollar.setBackgroundResource(R.color.white)
-            }
+    // Choose buy and sale all type valyuta //////////////////////////////////////////////////////////////////////////////////////////
+    fun showBuyAndSaleAllValyutaDialog(activity: Activity, buyOrSale: String) {
+        val builder = AlertDialog.Builder(activity)
+        val view = activity.layoutInflater.inflate(R.layout.dialog_all_kurs_type_fragment, null)
+        builder.setView(view)
+        val dialog = builder.create()
+        dialog.show()
+        val llUsd = view.findViewById<LinearLayout>(R.id.ll_usd)
+        val llEur = view.findViewById<LinearLayout>(R.id.ll_eur)
+        val llGbp = view.findViewById<LinearLayout>(R.id.ll_gbp)
+        val llChf = view.findViewById<LinearLayout>(R.id.ll_chf)
+        val llJpy = view.findViewById<LinearLayout>(R.id.ll_jpy)
+        val llRub = view.findViewById<LinearLayout>(R.id.ll_rub)
+        llUsd.setOnClickListener {
+            listener?.itemAllKursTypeDialogClick(buyOrSale, "usd")
+            dialog.dismiss()
+        }
+        llEur.setOnClickListener {
+            listener?.itemAllKursTypeDialogClick(buyOrSale, "eur")
+            dialog.dismiss()
+        }
+        llGbp.setOnClickListener {
+            listener?.itemAllKursTypeDialogClick(buyOrSale, "gbp")
+            dialog.dismiss()
+        }
+        llChf.setOnClickListener {
+            listener?.itemAllKursTypeDialogClick(buyOrSale, "chf")
+            dialog.dismiss()
+        }
+        llJpy.setOnClickListener {
+            listener?.itemAllKursTypeDialogClick(buyOrSale, "jpy")
+            dialog.dismiss()
+        }
+        llRub.setOnClickListener {
+            listener?.itemAllKursTypeDialogClick(buyOrSale, "rub")
+            dialog.dismiss()
         }
     }
-
-    // Choose kurs type dialog logic //
+    // Choose buy and sale all type valyuta //////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -43,6 +43,18 @@
             android:textSize="@dimen/_11ssp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_flag"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_below="@+id/tit_one"
+        android:layout_alignTop="@+id/tit_two"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_alignBottom="@+id/tit_two"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_25sdp"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tit_two"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

@@ -47,6 +47,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:indeterminateTint="@color/black"
+                    android:layout_centerVertical="true"/>
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_distinct_name"
                     android:layout_width="wrap_content"

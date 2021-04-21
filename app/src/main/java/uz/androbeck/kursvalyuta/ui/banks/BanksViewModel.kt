@@ -17,7 +17,7 @@ class BanksViewModel : ViewModel() {
             }
             emit(element)
         } catch (e: Exception) {
-            println("exception -> ${e.message}")
+            println("getMarkaziyBankValyuta -> exception -> ${e.message}")
             emit(null)
         }
     }
@@ -29,7 +29,7 @@ class BanksViewModel : ViewModel() {
             }
             emit(element)
         } catch (e: Exception) {
-            println("exception -> ${e.message}")
+            println("getAsakaBankValyuta -> exception -> ${e.message}")
             emit(null)
         }
     }
@@ -41,7 +41,7 @@ class BanksViewModel : ViewModel() {
             }
             emit(element)
         } catch (e: Exception) {
-            println("exception -> ${e.message}")
+            println("getIpotekaBankValyuta -> exception -> ${e.message}")
             emit(null)
         }
     }
@@ -50,11 +50,38 @@ class BanksViewModel : ViewModel() {
         try {
             val element = withContext(IO) {
                 Objects.document("https://kapitalbank.uz/uz/welcome.php")
-                    .getElementsByClass("items")
+                    .getElementsByTag("table")
             }
             emit(element)
         } catch (e: Exception) {
-            println("exception -> ${e.message}")
+            println("getKapitalBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
+    fun getQishloqQurilishBankValyuta(): LiveData<Elements?> = liveData {
+        try {
+            println("643724623746287")
+            val element = withContext(IO) {
+                Objects.document("http://qishloqqurilishbank.uz/currency-rates")
+                    .getElementsByClass("table-tbody")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println("getQishloqQurilishBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
+    fun getSanoatQurilishBankValyuta(): LiveData<Elements?> = liveData {
+        try {
+            val element = withContext(IO) {
+                Objects.document("https://sqb.uz/uz/")
+                    .getElementsByClass("calculate-table")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println(" getSanoatQurilishBankValyuta -> exception -> ${e.message}")
             emit(null)
         }
     }

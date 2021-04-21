@@ -113,7 +113,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/usd" />
+                        app:srcCompat="@drawable/ic_united_states_flag" />
 
                     <LinearLayout
                         android:id="@+id/ll_usd"
@@ -136,7 +136,6 @@
                             android:id="@+id/tv_usd_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Olish : 10470.00 so'm" />
@@ -145,7 +144,6 @@
                             android:id="@+id/tv_usd_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Sotish : 10470.00 so'm" />
@@ -170,7 +168,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/euro" />
+                        app:srcCompat="@drawable/ic_europe_flag" />
 
                     <LinearLayout
                         android:id="@+id/ll_eur"
@@ -193,7 +191,6 @@
                             android:id="@+id/tv_eur_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Olish : 10470.00 so'm" />
@@ -202,7 +199,6 @@
                             android:id="@+id/tv_eur_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Sotish : 10470.00 so'm" />
@@ -227,7 +223,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/gbp" />
+                        app:srcCompat="@drawable/ic_england_flag" />
 
                     <LinearLayout
                         android:id="@+id/ll_gbp"
@@ -250,7 +246,6 @@
                             android:id="@+id/tv_gbp_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Olish : 10470.00 so'm" />
@@ -259,7 +254,6 @@
                             android:id="@+id/tv_gbp_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Sotish : 10470.00 so'm" />
@@ -284,7 +278,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/chf" />
+                        app:srcCompat="@drawable/ic_switzerland_flag" />
 
                     <LinearLayout
                         android:id="@+id/ll_chf"
@@ -307,7 +301,6 @@
                             android:id="@+id/tv_chf_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Olish : 10470.00 so'm" />
@@ -316,7 +309,6 @@
                             android:id="@+id/tv_chf_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Sotish : 10470.00 so'm" />
@@ -341,7 +333,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/jpy" />
+                        app:srcCompat="@drawable/ic_japan_flag" />
 
                     <LinearLayout
                         android:id="@+id/ll_jpy"
@@ -364,7 +356,6 @@
                             android:id="@+id/tv_jpy_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Olish : 10470.00 so'm" />
@@ -373,7 +364,6 @@
                             android:id="@+id/tv_jpy_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Sotish : 10470.00 so'm" />
@@ -398,7 +388,7 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/rub" />
+                        app:srcCompat="@drawable/ic_russia_flag" />
 
                     <LinearLayout
                         android:id="@+id/ll_rub"
@@ -421,7 +411,6 @@
                             android:id="@+id/tv_rub_buy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Olish : 10470.00 so'm" />
@@ -430,7 +419,6 @@
                             android:id="@+id/tv_rub_sale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:textSize="@dimen/_13ssp"
                             app:fontFamily="@font/g_medium"
                             tools:text="Sotish : 10470.00 so'm" />

@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ActivityItemBankBinding
 import uz.androbeck.kursvalyuta.ui.dialogs.Dialogs
+import uz.androbeck.kursvalyuta.utils.Helper
 import uz.androbeck.kursvalyuta.visible
+import java.text.DecimalFormat
 
 @SuppressLint("SetTextI18n")
 class ItemBankActivity : AppCompatActivity() {
@@ -34,17 +36,17 @@ class ItemBankActivity : AppCompatActivity() {
             data = dataIntent!!.getParcelable("data")!!
         }
         with(binding) {
-            if (data.buyUsd == "" || data.saleUsd == "")
+            if (data.buyUsd == "0" || data.saleUsd == "0")
                 rlUsd.visible(false)
-            if (data.buyEur == "" || data.saleEur == "")
+            if (data.buyEur == "0" || data.saleEur == "0")
                 rlEur.visible(false)
-            if (data.buyGbp == "" || data.saleGbp == "")
+            if (data.buyGbp == "0" || data.saleGbp == "0")
                 rlGbp.visible(false)
-            if (data.buyChf == "" || data.saleChf == "")
+            if (data.buyChf == "0" || data.saleChf == "0")
                 rlChf.visible(false)
-            if (data.buyJpy == "" || data.saleJpy == "")
+            if (data.buyJpy == "0" || data.saleJpy == "0")
                 rlJpy.visible(false)
-            if (data.buyRub == "" || data.saleRub == "")
+            if (data.buyRub == "0" || data.saleRub == "0")
                 rlRub.visible(false)
         }
 
@@ -54,23 +56,23 @@ class ItemBankActivity : AppCompatActivity() {
         with(binding) {
             tvBankName.text = data.bankName
 
-            tvUsdBuy.text = "Olish : ${data.buyUsd}"
-            tvUsdSale.text = "Sotish : ${data.saleUsd}"
+            tvUsdBuy.text = "Olish : ${Helper.formatNumber(data.buyUsd.toInt())} so'm"
+            tvUsdSale.text = "Sotish : ${Helper.formatNumber(data.saleUsd.toInt())} so'm"
 
-            tvEurBuy.text = "Olish : ${data.buyEur}"
-            tvEurSale.text = "Sotish : ${data.saleEur}"
+            tvEurBuy.text = "Olish : ${Helper.formatNumber(data.buyEur.toInt())} so'm"
+            tvEurSale.text = "Sotish : ${Helper.formatNumber(data.saleEur.toInt())} so'm"
 
-            tvGbpBuy.text = "Olish : ${data.buyGbp}"
-            tvGbpSale.text = "Sotish : ${data.saleGbp}"
+            tvGbpBuy.text = "Olish : ${Helper.formatNumber(data.buyGbp.toInt())} so'm"
+            tvGbpSale.text = "Sotish : ${Helper.formatNumber(data.saleGbp.toInt())} so'm"
 
-            tvChfBuy.text = "Olish : ${data.buyChf}"
-            tvChfSale.text = "Sotish : ${data.saleChf}"
+            tvChfBuy.text = "Olish : ${Helper.formatNumber(data.buyChf.toInt())} so'm"
+            tvChfSale.text = "Sotish : ${Helper.formatNumber(data.saleChf.toInt())} so'm"
 
-            tvJpyBuy.text = "Olish : ${data.buyJpy}"
-            tvJpySale.text = "Sotish : ${data.saleJpy}"
+            tvJpyBuy.text = "Olish : ${Helper.formatNumber(data.buyJpy.toInt())} so'm"
+            tvJpySale.text = "Sotish : ${Helper.formatNumber(data.saleJpy.toInt())} so'm"
 
-            tvRubBuy.text = "Olish : ${data.buyRub}"
-            tvRubSale.text = "Sotish : ${data.saleRub}"
+            tvRubBuy.text = "Olish : ${Helper.formatNumber(data.buyRub.toInt())} so'm"
+            tvRubSale.text = "Sotish : ${Helper.formatNumber(data.saleRub.toInt())} so'm"
         }
     }
 
@@ -83,47 +85,47 @@ class ItemBankActivity : AppCompatActivity() {
                 val shareIntent = Intent()
                 shareIntent.action = Intent.ACTION_SEND
                 shareIntent.type = "text/plain"
-                if (data.buyUsd != "" && data.saleUsd != "")
+                if (data.buyUsd != "0" && data.saleUsd != "0")
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "${data.bankName}\nUSD: ${data.buyUsd} - ${data.saleUsd}"
+                        "${data.bankName}  | so'mda\nUSD: ${data.buyUsd} - ${data.saleUsd}"
                     )
-                if (data.buyUsd != "" && data.saleUsd != "" && data.buyEur != "" && data.saleEur != "")
+                if (data.buyUsd != "0" && data.saleUsd != "0" && data.buyEur != "" && data.saleEur != "0")
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "${data.bankName}\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}"
+                        "${data.bankName}  | so'mda\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}"
                     )
-                if (data.buyUsd != "" && data.saleUsd != "" && data.buyEur != "" && data.saleEur != "" && data.buyGbp != "" && data.saleGbp != "")
+                if (data.buyUsd != "0" && data.saleUsd != "0" && data.buyEur != "0" && data.saleEur != "0" && data.buyGbp != "0" && data.saleGbp != "0")
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "${data.bankName}\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}"
+                        "${data.bankName}  | so'mda\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}"
                     )
-                if (data.buyUsd != "" && data.saleUsd != "" && data.buyEur != "" && data.saleEur != "" && data.buyGbp != ""
-                    && data.saleGbp != "" && data.buyChf != "" && data.saleChf != ""
+                if (data.buyUsd != "0" && data.saleUsd != "0" && data.buyEur != "0" && data.saleEur != "0" && data.buyGbp != "0"
+                    && data.saleGbp != "0" && data.buyChf != "0" && data.saleChf != "0"
                 )
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "${data.bankName}\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}\nCHF: ${data.buyChf} - ${data.saleChf}"
+                        "${data.bankName}  | so'mda\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}\nCHF: ${data.buyChf} - ${data.saleChf}"
                     )
-                if (data.buyUsd != "" && data.saleUsd != "" && data.buyEur != "" && data.saleEur != "" && data.buyGbp != ""
-                    && data.saleGbp != "" && data.buyChf != "" && data.saleChf != "" && data.buyJpy != "" && data.saleJpy != ""
+                if (data.buyUsd != "0" && data.saleUsd != "0" && data.buyEur != "0" && data.saleEur != "0" && data.buyGbp != "0"
+                    && data.saleGbp != "0" && data.buyChf != "0" && data.saleChf != "0" && data.buyJpy != "0" && data.saleJpy != "0"
                 )
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "${data.bankName}\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}\nCHF: ${data.buyChf} - ${data.saleChf}\nJPY: ${data.buyJpy} - ${data.saleJpy}"
+                        "${data.bankName}  | so'mda\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}\nCHF: ${data.buyChf} - ${data.saleChf}\nJPY: ${data.buyJpy} - ${data.saleJpy}"
                     )
-                if (data.buyUsd != "" && data.saleUsd != "" && data.buyEur != "" && data.saleEur != "" && data.buyGbp != ""
-                    && data.saleGbp != "" && data.buyChf != "" && data.saleChf != "" && data.buyJpy != "" && data.saleJpy != ""
-                    && data.buyRub != "" && data.saleRub != ""
+                if (data.buyUsd != "0" && data.saleUsd != "0" && data.buyEur != "0" && data.saleEur != "0" && data.buyGbp != "0"
+                    && data.saleGbp != "0" && data.buyChf != "0" && data.saleChf != "0" && data.buyJpy != "0" && data.saleJpy != "0"
+                    && data.buyRub != "0" && data.saleRub != "0"
                 )
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "${data.bankName}\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}\nCHF: ${data.buyChf} - ${data.saleChf}\nJPY: ${data.buyJpy} - ${data.saleJpy}\nRUB: ${data.buyRub} - ${data.saleRub}"
+                        "${data.bankName}  | so'mda\nUSD: ${data.buyUsd} - ${data.saleUsd}\nEUR: ${data.buyEur} - ${data.saleEur}\nGBP: ${data.buyGbp} - ${data.saleGbp}\nCHF: ${data.buyChf} - ${data.saleChf}\nJPY: ${data.buyJpy} - ${data.saleJpy}\nRUB: ${data.buyRub} - ${data.saleRub}"
                     )
-                startActivity(Intent.createChooser(shareIntent, "Hello"))
+                startActivity(Intent.createChooser(shareIntent, "Kurslarni ulashish"))
             }
             viewCalculator.setOnClickListener {
-                Dialogs().calculateDialog(this@ItemBankActivity,data)
+                Dialogs().calculateDialog(this@ItemBankActivity, data)
             }
         }
     }

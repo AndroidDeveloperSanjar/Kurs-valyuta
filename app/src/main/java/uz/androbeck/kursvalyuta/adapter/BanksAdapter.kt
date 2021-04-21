@@ -12,6 +12,7 @@ import coil.load
 import uz.androbeck.kursvalyuta.R
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ItemBanksBinding
+import uz.androbeck.kursvalyuta.utils.Helper
 import uz.androbeck.kursvalyuta.visible
 
 @SuppressLint("SetTextI18n")
@@ -49,58 +50,58 @@ class BanksAdapter(
                     crossfade(1000)
                 }
                 tvBankName.text = data.bankName
-                if (data.buyUsd == "" && data.saleUsd == "")
+                if (data.buyUsd == "0" && data.saleUsd == "0")
                     rlUsd.visible(false)
                 else {
                     rlUsd.visible(true)
-                    tvBuyUsd.text = data.buyUsd
-                    tvSaleUsd.text = data.saleUsd
+                    tvBuyUsd.text = "${Helper.formatNumber(data.buyUsd.toInt())} so'm"
+                    tvSaleUsd.text = "${Helper.formatNumber(data.saleUsd.toInt())} so'm"
                 }
-                if (data.buyEur == "" && data.saleEur == "")
+                if (data.buyEur == "0" && data.saleEur == "0")
                     rlEur.visible(false)
                 else {
                     rlEur.visible(true)
-                    tvBuyEur.text = data.buyEur
-                    tvSaleEur.text = data.saleEur
+                    tvBuyEur.text = "${Helper.formatNumber(data.buyEur.toInt())} so'm"
+                    tvSaleEur.text = "${Helper.formatNumber(data.saleEur.toInt())} so'm"
                 }
-                if (data.buyGbp == "" && data.saleGbp == "")
+                if (data.buyGbp == "0" && data.saleGbp == "0")
                     rlGbp.visible(false)
                 else {
                     rlGbp.visible(true)
-                    tvBuyGbp.text = data.buyGbp
-                    tvSaleGbp.text = data.saleGbp
+                    tvBuyGbp.text = "${Helper.formatNumber(data.buyGbp.toInt())} so'm"
+                    tvSaleGbp.text = "${Helper.formatNumber(data.saleGbp.toInt())} so'm"
                 }
-                if (data.buyChf == "" && data.saleChf == "")
+                if (data.buyChf == "0" && data.saleChf == "0")
                     rlChf.visible(false)
                 else {
                     rlChf.visible(true)
-                    tvBuyChf.text = data.buyChf
-                    tvSaleChf.text = data.saleChf
+                    tvBuyChf.text = "${Helper.formatNumber(data.buyChf.toInt())} so'm"
+                    tvSaleChf.text = "${Helper.formatNumber(data.saleChf.toInt())} so'm"
                 }
-                if (data.buyJpy == "" && data.saleJpy == "")
+                if (data.buyJpy == "0" && data.saleJpy == "0")
                     rlJpy.visible(false)
                 else {
                     rlJpy.visible(true)
-                    tvBuyJpy.text = data.buyJpy
-                    tvSaleJpy.text = data.saleJpy
+                    tvBuyJpy.text = "${Helper.formatNumber(data.buyJpy.toInt())} so'm"
+                    tvSaleJpy.text = "${Helper.formatNumber(data.saleJpy.toInt())} so'm"
                 }
-                if (data.buyRub == "" && data.saleRub == "")
+                if (data.buyRub == "0" && data.saleRub == "0")
                     rlRub.visible(false)
                 else {
                     rlRub.visible(true)
-                    tvBuyRub.text = data.buyRub
-                    tvSaleRub.text = data.buyRub
+                    tvBuyRub.text = "${Helper.formatNumber(data.buyRub.toInt())} so'm"
+                    tvSaleRub.text = "${Helper.formatNumber(data.saleRub.toInt())} so'm"
                 }
-                if (data.buyUsdAtm == "" && data.saleUsdAtm == "")
+                if (data.buyUsdAtm == "0" && data.saleUsdAtm == "0")
                     rlUsdAtm.visible(false)
                 else {
                     rlUsdAtm.visible(true)
-                    tvBuyUsdAtm.text = data.buyUsdAtm
-                    tvSaleUsdAtm.text = data.saleUsdAtm
+                    tvBuyUsdAtm.text = "${Helper.formatNumber(data.buyUsdAtm.toInt())} so'm"
+                    tvSaleUsdAtm.text = "${Helper.formatNumber(data.saleUsdAtm.toInt())} so'm"
                 }
-                if (data.buyChf == "" && data.saleChf == ""
-                    && data.buyJpy == "" && data.saleJpy == ""
-                    && data.buyRub == "" && data.saleRub == ""
+                if (data.buyChf == "0" && data.saleChf == "0"
+                    && data.buyJpy == "0" && data.saleJpy == "0"
+                    && data.buyRub == "0" && data.saleRub == "0"
                 )
                     ivArrowDownAndUp.visible(false)
                 else
