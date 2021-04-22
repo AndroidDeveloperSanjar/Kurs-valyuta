@@ -2,6 +2,7 @@ package uz.androbeck.kursvalyuta.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import android.viewbinding.library.activity.viewBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.root)
         lifecycleScope.launch {
             delay(3000L)

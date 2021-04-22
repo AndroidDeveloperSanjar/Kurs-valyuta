@@ -57,7 +57,7 @@ class Dialogs(private val listener: DialogListener? = null) {
             activity.hideKeyBoard(it)
         }
         btnCalculate.setOnClickListener {
-            val kurs = autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 4)
+            val kurs = autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 4).replace(" ","")
             val inputSum = etInputSum.text.toString().trim()
             if (inputSum.isNotEmpty() && autoComplete.text.toString() != "Valyuta kursini tanlang") {
                 val inputSumInt = inputSum.toInt()
@@ -101,7 +101,7 @@ class Dialogs(private val listener: DialogListener? = null) {
             stringArray.add("EUR sotish : ${data.saleEur} so'm")
         }
         if (data.buyGbp != "0" && data.saleGbp != "0") {
-            stringArray.add("GBP  olish  : ${data.buyGbp} so'm")
+            stringArray.add("GBP olish  : ${data.buyGbp} so'm")
             stringArray.add("GBP sotish : ${data.saleGbp} so'm")
         }
         if (data.buyChf != "0" && data.saleChf != "0") {

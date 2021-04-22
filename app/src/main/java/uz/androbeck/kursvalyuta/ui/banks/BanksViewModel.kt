@@ -3,8 +3,11 @@ package uz.androbeck.kursvalyuta.ui.banks
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import uz.androbeck.kursvalyuta.utils.Objects
 
@@ -50,7 +53,7 @@ class BanksViewModel : ViewModel() {
         try {
             val element = withContext(IO) {
                 Objects.document("https://kapitalbank.uz/uz/welcome.php")
-                    .getElementsByTag("table")
+                    .getElementsByClass("items")
             }
             emit(element)
         } catch (e: Exception) {
@@ -61,11 +64,19 @@ class BanksViewModel : ViewModel() {
 
     fun getQishloqQurilishBankValyuta(): LiveData<Elements?> = liveData {
         try {
-            println("643724623746287")
             val element = withContext(IO) {
-                Objects.document("http://qishloqqurilishbank.uz/currency-rates")
+                Objects.document("https://qishloqqurilishbank.uz/")
                     .getElementsByClass("table-tbody")
             }
+            CoroutineScope(IO).launch {
+                println(
+                    "kdlas${
+                        Objects.document("http://qishloqqurilishbank.uz/currency-rates")
+                            .getElementsByClass("table-tbody")
+                    }"
+                )
+            }
+            println(element)
             emit(element)
         } catch (e: Exception) {
             println("getQishloqQurilishBankValyuta -> exception -> ${e.message}")
@@ -76,8 +87,7 @@ class BanksViewModel : ViewModel() {
     fun getSanoatQurilishBankValyuta(): LiveData<Elements?> = liveData {
         try {
             val element = withContext(IO) {
-                Objects.document("https://sqb.uz/uz/")
-                    .getElementsByClass("calculate-table")
+                Objects.document("https://sqb.uz/uz/").body().getElementsByClass("container")
             }
             emit(element)
         } catch (e: Exception) {
@@ -85,4 +95,29 @@ class BanksViewModel : ViewModel() {
             emit(null)
         }
     }
+
+    fun getTurkistonBankValyuta(): LiveData<Elements?> = liveData {
+        try {
+            val element = withContext(IO) {
+                Objects.document("https://turkistonbank.uz/ru/#anchor1").getElementsByTag("tbody")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println(" getTurkistonBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
+    fun getAloqaBankValyuta(): LiveData<Element?> = liveData {
+        try {
+            val element = withContext(IO) {
+                Objects.document("https://aloqabank.uz/").getElementById("slider-inner")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println(" getTurkistonBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
 }

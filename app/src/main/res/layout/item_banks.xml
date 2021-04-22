@@ -220,12 +220,13 @@
                 android:id="@+id/ll_all_valyuta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/rl_chf"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -265,7 +266,7 @@
                     android:id="@+id/rl_jpy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp">
+                    android:layout_marginBottom="@dimen/_5sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_buy_jpy"
@@ -304,7 +305,7 @@
                     android:id="@+id/rl_rub"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp">
+                    android:layout_marginBottom="@dimen/_5sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_buy_rub"
@@ -343,7 +344,6 @@
                     android:id="@+id/rl_usd_atm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView

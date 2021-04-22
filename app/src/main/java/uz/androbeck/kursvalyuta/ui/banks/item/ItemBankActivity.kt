@@ -10,7 +10,6 @@ import uz.androbeck.kursvalyuta.databinding.ActivityItemBankBinding
 import uz.androbeck.kursvalyuta.ui.dialogs.Dialogs
 import uz.androbeck.kursvalyuta.utils.Helper
 import uz.androbeck.kursvalyuta.visible
-import java.text.DecimalFormat
 
 @SuppressLint("SetTextI18n")
 class ItemBankActivity : AppCompatActivity() {
@@ -68,11 +67,11 @@ class ItemBankActivity : AppCompatActivity() {
             tvChfBuy.text = "Olish : ${Helper.formatNumber(data.buyChf.toInt())} so'm"
             tvChfSale.text = "Sotish : ${Helper.formatNumber(data.saleChf.toInt())} so'm"
 
-            tvJpyBuy.text = "Olish : ${Helper.formatNumber(data.buyJpy.toInt())} so'm"
-            tvJpySale.text = "Sotish : ${Helper.formatNumber(data.saleJpy.toInt())} so'm"
+            tvJpyBuy.text = "Olish : ${data.buyJpy} so'm"
+            tvJpySale.text = "Sotish : ${data.saleJpy} so'm"
 
-            tvRubBuy.text = "Olish : ${Helper.formatNumber(data.buyRub.toInt())} so'm"
-            tvRubSale.text = "Sotish : ${Helper.formatNumber(data.saleRub.toInt())} so'm"
+            tvRubBuy.text = "Olish : ${data.buyRub} so'm"
+            tvRubSale.text = "Sotish : ${data.saleRub} so'm"
         }
     }
 

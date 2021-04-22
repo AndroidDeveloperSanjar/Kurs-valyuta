@@ -82,15 +82,15 @@ class BanksAdapter(
                     rlJpy.visible(false)
                 else {
                     rlJpy.visible(true)
-                    tvBuyJpy.text = "${Helper.formatNumber(data.buyJpy.toInt())} so'm"
-                    tvSaleJpy.text = "${Helper.formatNumber(data.saleJpy.toInt())} so'm"
+                    tvBuyJpy.text = "${data.buyJpy} so'm"
+                    tvSaleJpy.text = "${data.saleJpy} so'm"
                 }
                 if (data.buyRub == "0" && data.saleRub == "0")
                     rlRub.visible(false)
                 else {
                     rlRub.visible(true)
-                    tvBuyRub.text = "${Helper.formatNumber(data.buyRub.toInt())} so'm"
-                    tvSaleRub.text = "${Helper.formatNumber(data.saleRub.toInt())} so'm"
+                    tvBuyRub.text = "${data.buyRub} so'm"
+                    tvSaleRub.text = "${data.saleRub} so'm"
                 }
                 if (data.buyUsdAtm == "0" && data.saleUsdAtm == "0")
                     rlUsdAtm.visible(false)
