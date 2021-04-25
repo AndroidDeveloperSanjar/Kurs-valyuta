@@ -11,6 +11,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:alpha="0.7"
         android:layout_marginBottom="@dimen/_5sdp"
         app:cardBackgroundColor="#ECEFF1"
         app:cardCornerRadius="@dimen/_7sdp">
@@ -59,6 +60,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_buy_and_sale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

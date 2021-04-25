@@ -40,86 +40,164 @@ class BanksAdapter(
         fun bind() {
             val data = getItem(adapterPosition)
             with(binding) {
-                val imageLoader = ImageLoader.Builder(binding.root.context)
-                    .componentRegistry {
-                        add(SvgDecoder(binding.root.context))
-                    }
-                    .build()
-                ivBankLogo.load(data.banksLogo, imageLoader) {
-                    crossfade(true)
-                    crossfade(1000)
-                }
-                tvBankName.text = data.bankName
-                if (data.buyUsd == "0" && data.saleUsd == "0")
-                    rlUsd.visible(false)
-                else {
-                    rlUsd.visible(true)
-                    tvBuyUsd.text = "${Helper.formatNumber(data.buyUsd.toInt())} so'm"
-                    tvSaleUsd.text = "${Helper.formatNumber(data.saleUsd.toInt())} so'm"
-                }
-                if (data.buyEur == "0" && data.saleEur == "0")
-                    rlEur.visible(false)
-                else {
-                    rlEur.visible(true)
-                    tvBuyEur.text = "${Helper.formatNumber(data.buyEur.toInt())} so'm"
-                    tvSaleEur.text = "${Helper.formatNumber(data.saleEur.toInt())} so'm"
-                }
-                if (data.buyGbp == "0" && data.saleGbp == "0")
-                    rlGbp.visible(false)
-                else {
-                    rlGbp.visible(true)
-                    tvBuyGbp.text = "${Helper.formatNumber(data.buyGbp.toInt())} so'm"
-                    tvSaleGbp.text = "${Helper.formatNumber(data.saleGbp.toInt())} so'm"
-                }
-                if (data.buyChf == "0" && data.saleChf == "0")
-                    rlChf.visible(false)
-                else {
-                    rlChf.visible(true)
-                    tvBuyChf.text = "${Helper.formatNumber(data.buyChf.toInt())} so'm"
-                    tvSaleChf.text = "${Helper.formatNumber(data.saleChf.toInt())} so'm"
-                }
-                if (data.buyJpy == "0" && data.saleJpy == "0")
-                    rlJpy.visible(false)
-                else {
-                    rlJpy.visible(true)
-                    tvBuyJpy.text = "${data.buyJpy} so'm"
-                    tvSaleJpy.text = "${data.saleJpy} so'm"
-                }
-                if (data.buyRub == "0" && data.saleRub == "0")
-                    rlRub.visible(false)
-                else {
-                    rlRub.visible(true)
-                    tvBuyRub.text = "${data.buyRub} so'm"
-                    tvSaleRub.text = "${data.saleRub} so'm"
-                }
-                if (data.buyUsdAtm == "0" && data.saleUsdAtm == "0")
-                    rlUsdAtm.visible(false)
-                else {
-                    rlUsdAtm.visible(true)
-                    tvBuyUsdAtm.text = "${Helper.formatNumber(data.buyUsdAtm.toInt())} so'm"
-                    tvSaleUsdAtm.text = "${Helper.formatNumber(data.saleUsdAtm.toInt())} so'm"
-                }
-                if (data.buyChf == "0" && data.saleChf == "0"
-                    && data.buyJpy == "0" && data.saleJpy == "0"
-                    && data.buyRub == "0" && data.saleRub == "0"
-                )
-                    ivArrowDownAndUp.visible(false)
-                else
-                    ivArrowDownAndUp.visible(true)
-                ivArrowDownAndUp.setOnClickListener {
-                    isDown = !isDown
-                    if (isDown) {
-                        ivArrowDownAndUp.setImageResource(R.drawable.ic_arrow_up)
-                        llAllValyuta.visible(true)
-                    } else {
-                        ivArrowDownAndUp.setImageResource(R.drawable.ic_arrow_down)
+                when (data.bankName) {
+                    "Markaziy bank" -> {
+                        val imageLoader = ImageLoader.Builder(binding.root.context)
+                            .componentRegistry {
+                                add(SvgDecoder(binding.root.context))
+                            }
+                            .build()
+                        ivBankLogo.load(data.banksLogo, imageLoader) {
+                            crossfade(true)
+                            crossfade(1000)
+                        }
+                        tvBankName.text = data.bankName
+                        rlBuyAndSale.visible(false)
+                        tvUSD.visible(false)
+                        tvEUR.visible(false)
+                        tvGBP.visible(false)
                         llAllValyuta.visible(false)
+                        ivArrowDownAndUp.visible(false)
+                        if (data.buyUsd == "0" && data.saleUsd == "0")
+                            rlUsd.visible(false)
+                        else {
+                            rlUsd.visible(true)
+                            tvBuyUsd.text = data.cbuUsd
+                            tvSaleUsd.text = data.cbuEur
+                        }
+                        if (data.buyEur == "0" && data.saleEur == "0")
+                            rlEur.visible(false)
+                        else {
+                            rlEur.visible(true)
+                            tvBuyEur.text = data.cbuRub
+                            tvSaleEur.text = data.cbuGbp
+                        }
+                        if (data.buyGbp == "0" && data.saleGbp == "0")
+                            rlGbp.visible(false)
+                        else {
+                            rlGbp.visible(true)
+                            tvBuyGbp.text = data.cbuJpy
+                            tvSaleGbp.text = data.cbuChf
+                        }
+//                        if (data.buyChf == "0" && data.saleChf == "0")
+//                            rlChf.visible(false)
+//                        else {
+//                            rlChf.visible(true)
+//                            tvBuyChf.text = "${Helper.formatNumber(data.buyChf.toInt())} so'm"
+//                            tvSaleChf.text = "${Helper.formatNumber(data.saleChf.toInt())} so'm"
+//                        }
+//                        if (data.buyJpy == "0" && data.saleJpy == "0")
+//                            rlJpy.visible(false)
+//                        else {
+//                            rlJpy.visible(true)
+//                            tvBuyJpy.text = "${data.buyJpy} so'm"
+//                            tvSaleJpy.text = "${data.saleJpy} so'm"
+//                        }
+//                        if (data.buyRub == "0" && data.saleRub == "0")
+//                            rlRub.visible(false)
+//                        else {
+//                            rlRub.visible(true)
+//                            tvBuyRub.text = "${data.buyRub} so'm"
+//                            tvSaleRub.text = "${data.saleRub} so'm"
+//                        }
+//                        if (data.buyUsdAtm == "0" && data.saleUsdAtm == "0")
+//                            rlUsdAtm.visible(false)
+//                        else {
+//                            rlUsdAtm.visible(true)
+//                            tvBuyUsdAtm.text = "${Helper.formatNumber(data.buyUsdAtm.toInt())} so'm"
+//                            tvSaleUsdAtm.text =
+//                                "${Helper.formatNumber(data.saleUsdAtm.toInt())} so'm"
+//                        }
+
+                    }
+                    else -> {
+                        rlBuyAndSale.visible(true)
+                        tvUSD.visible(true)
+                        tvEUR.visible(true)
+                        tvGBP.visible(true)
+                        val imageLoader = ImageLoader.Builder(binding.root.context)
+                            .componentRegistry {
+                                add(SvgDecoder(binding.root.context))
+                            }
+                            .build()
+                        ivBankLogo.load(data.banksLogo, imageLoader) {
+                            crossfade(true)
+                            crossfade(1000)
+                        }
+                        tvBankName.text = data.bankName
+                        if (data.buyUsd == "0" && data.saleUsd == "0")
+                            rlUsd.visible(false)
+                        else {
+                            rlUsd.visible(true)
+                            tvBuyUsd.text = "${Helper.formatNumber(data.buyUsd.toInt())} so'm"
+                            tvSaleUsd.text = "${Helper.formatNumber(data.saleUsd.toInt())} so'm"
+                        }
+                        if (data.buyEur == "0" && data.saleEur == "0")
+                            rlEur.visible(false)
+                        else {
+                            rlEur.visible(true)
+                            tvBuyEur.text = "${Helper.formatNumber(data.buyEur.toInt())} so'm"
+                            tvSaleEur.text = "${Helper.formatNumber(data.saleEur.toInt())} so'm"
+                        }
+                        if (data.buyGbp == "0" && data.saleGbp == "0")
+                            rlGbp.visible(false)
+                        else {
+                            rlGbp.visible(true)
+                            tvBuyGbp.text = "${Helper.formatNumber(data.buyGbp.toInt())} so'm"
+                            tvSaleGbp.text = "${Helper.formatNumber(data.saleGbp.toInt())} so'm"
+                        }
+                        if (data.buyChf == "0" && data.saleChf == "0")
+                            rlChf.visible(false)
+                        else {
+                            rlChf.visible(true)
+                            tvBuyChf.text = "${Helper.formatNumber(data.buyChf.toInt())} so'm"
+                            tvSaleChf.text = "${Helper.formatNumber(data.saleChf.toInt())} so'm"
+                        }
+                        if (data.buyJpy == "0" && data.saleJpy == "0")
+                            rlJpy.visible(false)
+                        else {
+                            rlJpy.visible(true)
+                            tvBuyJpy.text = "${data.buyJpy} so'm"
+                            tvSaleJpy.text = "${data.saleJpy} so'm"
+                        }
+                        if (data.buyRub == "0" && data.saleRub == "0")
+                            rlRub.visible(false)
+                        else {
+                            rlRub.visible(true)
+                            tvBuyRub.text = "${data.buyRub} so'm"
+                            tvSaleRub.text = "${data.saleRub} so'm"
+                        }
+                        if (data.buyUsdAtm == "0" && data.saleUsdAtm == "0")
+                            rlUsdAtm.visible(false)
+                        else {
+                            rlUsdAtm.visible(true)
+                            tvBuyUsdAtm.text = "${Helper.formatNumber(data.buyUsdAtm.toInt())} so'm"
+                            tvSaleUsdAtm.text =
+                                "${Helper.formatNumber(data.saleUsdAtm.toInt())} so'm"
+                        }
+                        if (data.buyChf == "0" && data.saleChf == "0"
+                            && data.buyJpy == "0" && data.saleJpy == "0"
+                            && data.buyRub == "0" && data.saleRub == "0"
+                        )
+                            ivArrowDownAndUp.visible(false)
+                        else
+                            ivArrowDownAndUp.visible(true)
+                        ivArrowDownAndUp.setOnClickListener {
+                            isDown = !isDown
+                            if (isDown) {
+                                ivArrowDownAndUp.setImageResource(R.drawable.ic_arrow_up)
+                                llAllValyuta.visible(true)
+                            } else {
+                                ivArrowDownAndUp.setImageResource(R.drawable.ic_arrow_down)
+                                llAllValyuta.visible(false)
+                            }
+                        }
+                        if (adapterPosition != RecyclerView.NO_POSITION)
+                            root.setOnClickListener {
+                                listener.itemClick(adapterPosition, data)
+                            }
                     }
                 }
-                if (adapterPosition != RecyclerView.NO_POSITION)
-                    root.setOnClickListener {
-                        listener.itemClick(adapterPosition, data)
-                    }
             }
         }
     }

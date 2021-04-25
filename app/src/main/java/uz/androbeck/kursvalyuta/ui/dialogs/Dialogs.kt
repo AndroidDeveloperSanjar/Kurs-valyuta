@@ -10,14 +10,15 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import uz.androbeck.kursvalyuta.DialogListener
 import uz.androbeck.kursvalyuta.R
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.hideKeyBoard
 import uz.androbeck.kursvalyuta.toast
 import uz.androbeck.kursvalyuta.utils.Helper
-import java.text.DecimalFormat
 
 @SuppressLint("SetTextI18n")
 class Dialogs(private val listener: DialogListener? = null) {
@@ -57,7 +58,8 @@ class Dialogs(private val listener: DialogListener? = null) {
             activity.hideKeyBoard(it)
         }
         btnCalculate.setOnClickListener {
-            val kurs = autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 4).replace(" ","")
+            val kurs = autoComplete.text.toString().substring(13, autoComplete.text.lastIndex - 4)
+                .replace(" ", "")
             val inputSum = etInputSum.text.toString().trim()
             if (inputSum.isNotEmpty() && autoComplete.text.toString() != "Valyuta kursini tanlang") {
                 val inputSumInt = inputSum.toInt()
@@ -181,4 +183,18 @@ class Dialogs(private val listener: DialogListener? = null) {
         }
     }
     // Choose buy and sale all type valyuta //////////////////////////////////////////////////////////////////////////////////////////
+
+    // No connection dialog //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    fun showNoConnectionDialog(activity: Activity, lifecycleScope: CoroutineScope) {
+        val builder = AlertDialog.Builder(activity)
+        val view = activity.layoutInflater.inflate(R.layout.dialog_no_connection, null)
+        builder.setView(view)
+        val dialog = builder.create()
+        dialog.show()
+        lifecycleScope.launch {
+            delay(5000L)
+            dialog.dismiss()
+        }
+    }
+    // No connection dialog //////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

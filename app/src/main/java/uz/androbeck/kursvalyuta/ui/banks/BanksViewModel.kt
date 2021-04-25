@@ -68,15 +68,6 @@ class BanksViewModel : ViewModel() {
                 Objects.document("https://qishloqqurilishbank.uz/")
                     .getElementsByClass("table-tbody")
             }
-            CoroutineScope(IO).launch {
-                println(
-                    "kdlas${
-                        Objects.document("http://qishloqqurilishbank.uz/currency-rates")
-                            .getElementsByClass("table-tbody")
-                    }"
-                )
-            }
-            println(element)
             emit(element)
         } catch (e: Exception) {
             println("getQishloqQurilishBankValyuta -> exception -> ${e.message}")
@@ -112,6 +103,18 @@ class BanksViewModel : ViewModel() {
         try {
             val element = withContext(IO) {
                 Objects.document("https://aloqabank.uz/").getElementById("slider-inner")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println(" getTurkistonBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
+    fun getIpakYoliBankValyuta(): LiveData<Elements?> = liveData {
+        try {
+            val element = withContext(IO) {
+                Objects.document("https://ipakyulibank.uz/physical/").getElementsByClass("flex cur_block_list lg8 xs12")
             }
             emit(element)
         } catch (e: Exception) {

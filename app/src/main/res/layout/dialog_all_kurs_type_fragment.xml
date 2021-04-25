@@ -20,12 +20,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center"
+                android:background="@drawable/bg_rl_ripple"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Aqsh dollari"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
@@ -40,12 +44,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center"
+                android:background="@drawable/bg_rl_ripple"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yevro"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
@@ -59,6 +67,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center"
+                android:background="@drawable/bg_rl_ripple"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -66,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:text="Angliya funt sterlingi"
                     android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
 
@@ -78,6 +90,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center"
+                android:background="@drawable/bg_rl_ripple"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -85,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:text="Shveytsariya franki"
                     android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
 
@@ -98,12 +114,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center"
+                android:background="@drawable/bg_rl_ripple"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yaponiya iyenasi"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
@@ -118,6 +138,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:gravity="center"
+                android:background="@drawable/bg_rl_ripple"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -125,6 +148,7 @@
                     android:layout_height="wrap_content"
                     android:text="Rossiya rubli"
                     android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
         </LinearLayout>
