@@ -11,7 +11,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:alpha="0.7"
+        android:alpha="0.8"
         android:layout_marginBottom="@dimen/_5sdp"
         app:cardBackgroundColor="#ECEFF1"
         app:cardCornerRadius="@dimen/_7sdp">
@@ -133,8 +133,9 @@
                     android:id="@+id/tv_USD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
                     android:text="USD"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium" />
             </RelativeLayout>
@@ -172,8 +173,9 @@
                     android:id="@+id/tv_EUR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
                     android:text="EUR"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium" />
             </RelativeLayout>
@@ -214,6 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="GBP"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/g_medium" />
             </RelativeLayout>
@@ -260,6 +263,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="CHF"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/g_medium" />
                 </RelativeLayout>
@@ -299,6 +303,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="JPY"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/g_medium" />
                 </RelativeLayout>
@@ -338,6 +343,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="RUB"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/g_medium" />
                 </RelativeLayout>
@@ -377,6 +383,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="ATM"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/g_medium" />
                 </RelativeLayout>

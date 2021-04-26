@@ -3,10 +3,9 @@ package uz.androbeck.kursvalyuta.ui.banks
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import uz.androbeck.kursvalyuta.utils.Objects
@@ -78,7 +77,10 @@ class BanksViewModel : ViewModel() {
     fun getSanoatQurilishBankValyuta(): LiveData<Elements?> = liveData {
         try {
             val element = withContext(IO) {
-                Objects.document("https://sqb.uz/uz/").body().getElementsByClass("container")
+                Jsoup.connect("https://sqb.uz/uz/")
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2")
+                    .get()
+                    .getElementsByTag("tbody")
             }
             emit(element)
         } catch (e: Exception) {
@@ -114,11 +116,39 @@ class BanksViewModel : ViewModel() {
     fun getIpakYoliBankValyuta(): LiveData<Elements?> = liveData {
         try {
             val element = withContext(IO) {
-                Objects.document("https://ipakyulibank.uz/physical/").getElementsByClass("flex cur_block_list lg8 xs12")
+                Objects.document("https://ipakyulibank.uz/physical/")
+                    .getElementsByClass("flex cur_block_list lg8 xs12")
             }
             emit(element)
         } catch (e: Exception) {
             println(" getTurkistonBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
+
+    fun getSaderatBankValyuta(): LiveData<Elements?> = liveData {
+        try {
+            val element = withContext(IO) {
+                Objects.document("https://www.saderatbank.uz/ru/")
+                    .getElementsByTag("tbody")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println(" getSaderatBankValyuta -> exception -> ${e.message}")
+            emit(null)
+        }
+    }
+
+    fun getXalqBankValyuta(): LiveData<Elements?> = liveData {
+        try {
+            val element = withContext(IO) {
+                Objects.document("https://www.xb.uz/ru/")
+                    .getElementsByClass("currency__table")
+            }
+            emit(element)
+        } catch (e: Exception) {
+            println(" getSaderatBankValyuta -> exception -> ${e.message}")
             emit(null)
         }
     }
