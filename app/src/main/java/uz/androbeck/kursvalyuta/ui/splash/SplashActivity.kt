@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.root)
         lifecycleScope.launch {
-            delay(3000L)
+            delay(2000L)
             startActivity(Intent(this@SplashActivity, BanksActivity::class.java))
             finish()
         }

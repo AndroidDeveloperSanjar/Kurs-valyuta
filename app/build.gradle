@@ -59,7 +59,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //Refresh layout
-    implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
+//    implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
 
     //Size views
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -70,7 +70,7 @@ dependencies {
     implementation("io.coil-kt:coil-svg:1.1.1")
 
     //Permissions
-    implementation 'com.karumi:dexter:6.2.2'
+//    implementation 'com.karumi:dexter:6.2.2'
 
     //View binding
     //implementation 'com.github.yogacp:android-viewbinding:1.0.2'
@@ -85,16 +85,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
-    //Activity and fragment
-    implementation "androidx.activity:activity-ktx:1.3.0-alpha05"
-    implementation "androidx.fragment:fragment-ktx:1.3.2"
+//    //Activity and fragment
+//    implementation "androidx.activity:activity-ktx:1.3.0-alpha07"
+//    implementation "androidx.fragment:fragment-ktx:1.3.3"
 
     //Jsoup
     implementation 'org.jsoup:jsoup:1.13.1'
 
     //Lottie
     implementation "com.airbnb.android:lottie:3.4.1"
-    implementation 'net.sourceforge.htmlunit:htmlunit:2.15'
 
-    implementation 'com.koushikdutta.ion:ion:3.1.0'
 }

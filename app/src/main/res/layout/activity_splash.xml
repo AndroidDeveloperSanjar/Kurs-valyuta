@@ -7,12 +7,16 @@
     android:background="@drawable/splash_one"
     tools:context=".ui.splash.SplashActivity">
 
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:layout_width="@dimen/_200sdp"-->
-<!--        android:layout_height="@dimen/_200sdp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        app:lottie_autoPlay="true"-->
-<!--        app:lottie_loop="true"-->
-<!--        app:lottie_rawRes="@raw/splash" />-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@color/white"
+        android:fontFamily="@font/g_medium"
+        android:gravity="center"
+        android:text="Author by Nishonov Sh.Sh "
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11ssp" />
 
 </RelativeLayout>
