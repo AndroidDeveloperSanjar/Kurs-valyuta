@@ -11,8 +11,8 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:alpha="0.8"
         android:layout_marginBottom="@dimen/_5sdp"
+        android:alpha="0.8"
         app:cardBackgroundColor="#ECEFF1"
         app:cardCornerRadius="@dimen/_7sdp">
 
@@ -228,45 +228,45 @@
                 android:visibility="gone"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:id="@+id/rl_chf"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_height="wrap_content">
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/rl_chf"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginBottom="@dimen/_5sdp"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_buy_chf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp"
-                        app:fontFamily="@font/g_medium"
-                        tools:text="10510 so'm" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_buy_chf"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_13ssp"-->
+<!--                        app:fontFamily="@font/g_medium"-->
+<!--                        tools:text="10510 so'm" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_sale_chf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp"
-                        app:fontFamily="@font/g_medium"
-                        tools:text="10430 so'm" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_sale_chf"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_13ssp"-->
+<!--                        app:fontFamily="@font/g_medium"-->
+<!--                        tools:text="10430 so'm" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_CHF"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="CHF"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp"
-                        app:fontFamily="@font/g_medium" />
-                </RelativeLayout>
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_CHF"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:text="CHF"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_13ssp"-->
+<!--                        app:fontFamily="@font/g_medium" />-->
+<!--                </RelativeLayout>-->
 
                 <RelativeLayout
                     android:id="@+id/rl_jpy"
@@ -348,45 +348,45 @@
                         app:fontFamily="@font/g_medium" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rl_usd_atm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp">
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/rl_usd_atm"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="@dimen/_5sdp">-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_buy_usd_atm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp"
-                        app:fontFamily="@font/g_medium"
-                        tools:text="10510 so'm" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_buy_usd_atm"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_13ssp"-->
+<!--                        app:fontFamily="@font/g_medium"-->
+<!--                        tools:text="10510 so'm" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_sale_usd_atm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp"
-                        app:fontFamily="@font/g_medium"
-                        tools:text="10430 so'm" />
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_sale_usd_atm"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_13ssp"-->
+<!--                        app:fontFamily="@font/g_medium"-->
+<!--                        tools:text="10430 so'm" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_USD_ATM"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="ATM"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp"
-                        app:fontFamily="@font/g_medium" />
-                </RelativeLayout>
+<!--                    <androidx.appcompat.widget.AppCompatTextView-->
+<!--                        android:id="@+id/tv_USD_ATM"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:text="ATM"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_13ssp"-->
+<!--                        app:fontFamily="@font/g_medium" />-->
+<!--                </RelativeLayout>-->
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

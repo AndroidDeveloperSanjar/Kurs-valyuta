@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/minorai_kalon"
     tools:context=".ui.banks.BanksActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:indeterminateTint="@color/black"
+        android:visibility="gone" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_progress"
@@ -50,13 +59,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ProgressBar
-                        android:id="@+id/progress_bar"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_qqb"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:indeterminateTint="@color/black" />
+                        app:srcCompat="@drawable/qqb_logo" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_distinct_name"
@@ -78,166 +86,166 @@
                         android:rotation="90"
                         app:srcCompat="@drawable/ic_kurs_type"
                         app:tint="@color/black" />
-
                 </RelativeLayout>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_cbu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:alpha="0.8"
+            app:cardBackgroundColor="#ECEFF1"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_7sdp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-        <!--        <com.google.android.material.card.MaterialCardView-->
-        <!--            android:id="@+id/cv_cbu"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="@dimen/_10sdp"-->
-        <!--            android:layout_marginTop="@dimen/_5sdp"-->
-        <!--            android:layout_marginEnd="@dimen/_10sdp"-->
-        <!--            android:layout_marginBottom="@dimen/_5sdp"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:cardBackgroundColor="#ECEFF1"-->
-        <!--            app:cardCornerRadius="@dimen/_7sdp">-->
+                android:orientation="vertical">
 
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:layout_gravity="center_vertical"-->
-        <!--                    android:orientation="horizontal"-->
-        <!--                    android:weightSum="1">-->
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_bank_logo"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_weight="0.2"
+                        android:padding="@dimen/_10sdp"
+                        app:srcCompat="@drawable/markaziy_bank_logo" />
 
-        <!--                    <androidx.appcompat.widget.AppCompatImageView-->
-        <!--                        android:id="@+id/iv_bank_logo"-->
-        <!--                        android:layout_width="0dp"-->
-        <!--                        android:layout_height="@dimen/_60sdp"-->
-        <!--                        android:layout_weight="0.2"-->
-        <!--                        android:padding="@dimen/_10sdp"-->
-        <!--                        app:srcCompat="@drawable/markaziy_bank_logo" />-->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bank_name"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/g_medium"
+                        android:gravity="center_vertical"
+                        android:text="Markaziy bank"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_bank_name"-->
-        <!--                        android:layout_width="0dp"-->
-        <!--                        android:layout_height="@dimen/_60sdp"-->
-        <!--                        android:layout_weight="0.6"-->
-        <!--                        android:fontFamily="@font/g_medium"-->
-        <!--                        android:gravity="center_vertical"-->
-        <!--                        android:text="Markaziy bank"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_15ssp" />-->
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_drop_down"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.2"
+                        android:padding="@dimen/_5sdp"
+                        app:srcCompat="@drawable/ic_arrow_down"
+                        app:tint="@color/black" />
+                </LinearLayout>
 
-        <!--                    &lt;!&ndash;                    <androidx.appcompat.widget.AppCompatImageView&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:id="@+id/iv_kurs_type_update"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:layout_height="@dimen/_40sdp"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:layout_gravity="center_vertical"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:layout_weight="0.2"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:padding="@dimen/_10sdp"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        android:rotation="90"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        app:srcCompat="@drawable/ic_kurs_type"&ndash;&gt;-->
-        <!--                    &lt;!&ndash;                        app:tint="@color/black" />&ndash;&gt;-->
+                <LinearLayout
+                    android:id="@+id/ll_valyuta_cbu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-        <!--                </LinearLayout>-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-        <!--                <RelativeLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content">-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cbu_usd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Olish" />
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_cbu_usd"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_marginStart="@dimen/_10sdp"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_13ssp"-->
-        <!--                        app:fontFamily="@font/g_medium"-->
-        <!--                        tools:text="Olish" />-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cbu_rub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Sotish" />
+                    </RelativeLayout>
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_cbu_rub"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_alignParentEnd="true"-->
-        <!--                        android:layout_marginEnd="@dimen/_10sdp"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_13ssp"-->
-        <!--                        app:fontFamily="@font/g_medium"-->
-        <!--                        tools:text="Sotish" />-->
-        <!--                </RelativeLayout>-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp">
 
-        <!--                <RelativeLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginTop="@dimen/_5sdp">-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cbu_gbp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="10510" />
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_cbu_gbp"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_centerVertical="true"-->
-        <!--                        android:layout_marginStart="@dimen/_10sdp"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_13ssp"-->
-        <!--                        app:fontFamily="@font/g_medium"-->
-        <!--                        tools:text="10510" />-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cbu_jpy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="10430" />
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_cbu_jpy"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_alignParentEnd="true"-->
-        <!--                        android:layout_centerVertical="true"-->
-        <!--                        android:layout_marginEnd="@dimen/_10sdp"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_13ssp"-->
-        <!--                        app:fontFamily="@font/g_medium"-->
-        <!--                        tools:text="10430" />-->
+                    </RelativeLayout>
 
-        <!--                </RelativeLayout>-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp">
 
-        <!--                <RelativeLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginTop="@dimen/_5sdp"-->
-        <!--                    android:layout_marginBottom="@dimen/_5sdp">-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cbu_eur"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="Dollar" />
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_cbu_eur"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_marginStart="@dimen/_10sdp"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_13ssp"-->
-        <!--                        app:fontFamily="@font/g_medium"-->
-        <!--                        tools:text="Dollar" />-->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_cbu_chf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13ssp"
+                            app:fontFamily="@font/g_medium"
+                            tools:text="10430" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-        <!--                    <androidx.appcompat.widget.AppCompatTextView-->
-        <!--                        android:id="@+id/tv_cbu_chf"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_alignParentEnd="true"-->
-        <!--                        android:layout_marginEnd="@dimen/_10sdp"-->
-        <!--                        android:textColor="@color/black"-->
-        <!--                        android:textSize="@dimen/_13ssp"-->
-        <!--                        app:fontFamily="@font/g_medium"-->
-        <!--                        tools:text="10430" />-->
-        <!--                </RelativeLayout>-->
-
-        <!--            </LinearLayout>-->
+            </LinearLayout>
 
 
-        <!--        </com.google.android.material.card.MaterialCardView>-->
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <!--        <com.baoyz.widget.PullRefreshLayout-->
         <!--            android:id="@+id/refresh_layout"-->
@@ -246,4 +254,4 @@
 
         <!--        </com.baoyz.widget.PullRefreshLayout>-->
     </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

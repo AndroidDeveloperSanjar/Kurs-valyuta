@@ -106,10 +106,6 @@ class Dialogs(private val listener: DialogListener? = null) {
             stringArray.add("GBP olish  : ${data.buyGbp} so'm")
             stringArray.add("GBP sotish : ${data.saleGbp} so'm")
         }
-        if (data.buyChf != "0" && data.saleChf != "0") {
-            stringArray.add("CHF olish  : ${data.buyChf} so'm")
-            stringArray.add("CHF sotish : ${data.saleChf} so'm")
-        }
         if (data.buyJpy != "0" && data.saleJpy != "0") {
             stringArray.add("JPY olish  : ${data.buyJpy} so'm")
             stringArray.add("JPY sotish : ${data.saleJpy} so'm")
@@ -154,7 +150,6 @@ class Dialogs(private val listener: DialogListener? = null) {
         val llUsd = view.findViewById<LinearLayout>(R.id.ll_usd)
         val llEur = view.findViewById<LinearLayout>(R.id.ll_eur)
         val llGbp = view.findViewById<LinearLayout>(R.id.ll_gbp)
-        val llChf = view.findViewById<LinearLayout>(R.id.ll_chf)
         val llJpy = view.findViewById<LinearLayout>(R.id.ll_jpy)
         val llRub = view.findViewById<LinearLayout>(R.id.ll_rub)
         llUsd.setOnClickListener {
@@ -167,10 +162,6 @@ class Dialogs(private val listener: DialogListener? = null) {
         }
         llGbp.setOnClickListener {
             listener?.itemAllKursTypeDialogClick(buyOrSale, "gbp")
-            dialog.dismiss()
-        }
-        llChf.setOnClickListener {
-            listener?.itemAllKursTypeDialogClick(buyOrSale, "chf")
             dialog.dismiss()
         }
         llJpy.setOnClickListener {

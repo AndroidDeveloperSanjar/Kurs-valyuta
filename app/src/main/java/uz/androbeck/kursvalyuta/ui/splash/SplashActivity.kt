@@ -3,7 +3,6 @@ package uz.androbeck.kursvalyuta.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
-import android.viewbinding.library.activity.viewBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
@@ -13,10 +12,11 @@ import uz.androbeck.kursvalyuta.ui.banks.BanksActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val binding: ActivitySplashBinding by viewBinding()
+    private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.root)
         lifecycleScope.launch {

@@ -81,28 +81,28 @@
                     app:fontFamily="@font/g_medium" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/black" />
-            <LinearLayout
-                android:id="@+id/ll_chf"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:gravity="center"
-                android:background="@drawable/bg_rl_ripple"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="horizontal">
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black" />-->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ll_chf"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_50sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:background="@drawable/bg_rl_ripple"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:orientation="horizontal">-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Shveytsariya franki"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@color/black"
-                    app:fontFamily="@font/g_medium" />
-            </LinearLayout>
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Shveytsariya franki"-->
+<!--                    android:textSize="@dimen/_15ssp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    app:fontFamily="@font/g_medium" />-->
+<!--            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"

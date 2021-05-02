@@ -3,36 +3,30 @@ package uz.androbeck.kursvalyuta.ui.banks
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.viewbinding.library.activity.viewBinding
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Default
 import uz.androbeck.kursvalyuta.*
 import uz.androbeck.kursvalyuta.adapter.BanksAdapter
 import uz.androbeck.kursvalyuta.adapter.model.BanksModel
 import uz.androbeck.kursvalyuta.databinding.ActivityBanksBinding
 import uz.androbeck.kursvalyuta.db.preferences.PreferencesManager
 import uz.androbeck.kursvalyuta.ui.banks.item.ItemBankActivity
+import uz.androbeck.kursvalyuta.ui.banks.item.QQBBankActivity
 import uz.androbeck.kursvalyuta.ui.dialogs.Dialogs
+import uz.androbeck.kursvalyuta.utils.Helper
 import uz.androbeck.kursvalyuta.utils.NetworkLiveData
-import java.security.KeyManagementException
-import java.security.cert.CertificateException
-import java.security.cert.X509Certificate
-import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSocketFactory
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
+import uz.androbeck.kursvalyuta.utils.Objects
+
 
 @SuppressLint("SetTextI18n")
-class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, DialogListener,
-    SwipeRefreshLayout.OnRefreshListener {
+class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, DialogListener {
 
-    private val binding: ActivityBanksBinding by viewBinding()
+    private lateinit var binding: ActivityBanksBinding
 
     private lateinit var banksAdapter: BanksAdapter
 
@@ -42,56 +36,25 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, Di
 
     private val viewModel: BanksViewModel by viewModels()
 
-    private val dataList = ArrayList<BanksModel>()
-
     private lateinit var networkLiveData: NetworkLiveData
 
-    private var isLoaded = false
+    private var dataList = ArrayList<BanksModel>()
+
+    private var buyUsdList = ArrayList<Data>()
+    private var saleUsdList = ArrayList<Data>()
+    private var buyRubList = ArrayList<Data>()
+    private var saleRubList = ArrayList<Data>()
+    private var buyEurList = ArrayList<Data>()
+    private var saleEurList = ArrayList<Data>()
+    private var buyGbpList = ArrayList<Data>()
+    private var saleGbpList = ArrayList<Data>()
+    private var buyJpyList = ArrayList<Data>()
+    private var saleJpyList = ArrayList<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityBanksBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        CoroutineScope(IO).launch {
-//            val doc =
-//                Jsoup.connect("https://www.xb.uz/ru/")
-//                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2")
-//                    .sslSocketFactory(socketFactory())
-//                    .get()
-//            println(doc.getElementsByClass("currency__table"))
-
-//            val res = Jsoup.connect("https://www.xb.uz/ru/")
-//                .ignoreHttpErrors(false)
-//                            .method(Connection.Method.GET)
-//                .followRedirects(true)
-//                .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36")
-//                .execute()
-//            println(res.parse().getElementsByClass("currency__table"))
-        }
-//
-//            val res = Jsoup.connect("https://qishloqqurilishbank.uz/currency-rates")
-//                .data(
-//                    "action", "account",
-//                    "redirect", "account_home.php?",
-//                    "radiobutton", "old",
-//                    "loginemail", "XXXXX",
-//                    "password", "XXXXX",
-//                    "LoginChoice", "Sign In to Secure Area"
-//                )
-//                .method(Connection.Method.GET)
-//                .followRedirects(true)
-//                .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36")
-//                .execute()
-//
-//            val res2 = Jsoup.connect("https://qishloqqurilishbank.uz/currency-rates")
-//                .data("ok", "End Prior Session")
-//                .method(Connection.Method.GET)
-//                .cookies(res.cookies())
-//                .followRedirects(true)
-//                .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36")
-//                .execute()
-//            println("doc -> " + res2.body())
-//        }
 
         init()
 
@@ -102,63 +65,263 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, Di
         isNetwork()
     }
 
-    private fun socketFactory(): SSLSocketFactory {
-        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-            @Throws(CertificateException::class)
-            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+    private fun getData() {
+        CoroutineScope(Default).launch {
+            val doc = Objects.document("https://bank.uz/uz/currency")
+            /// usd ///
+            val organizationContactsLeftUSD =
+                doc.getElementsByClass("organization-contacts")[0].getElementsByClass("bc-inner-blocks-left")[0]
+            val buyUsdValyutaList = organizationContactsLeftUSD.getElementsByTag("span").eachText()
+            var sumBuyUsd = 2
+            for (i in 1 until buyUsdValyutaList.lastIndex step 2) {
+                buyUsdList.add(
+                    Data(
+                        "buy",
+                        "usd",
+                        buyUsdValyutaList[i],
+                        buyUsdValyutaList[sumBuyUsd].substring(0, 6).replace(" ", "")
+                    )
+                )
+                sumBuyUsd += 2
+            }
+            val organizationContactsRightUSD =
+                doc.getElementsByClass("organization-contacts")[0].getElementsByClass("bc-inner-blocks-right")[0]
+            val saleUsdValyutaList =
+                organizationContactsRightUSD.getElementsByTag("span").eachText()
+            var sumSaleUsd = 2
+            for (i in 1 until saleUsdValyutaList.lastIndex step 2) {
+                saleUsdList.add(
+                    Data(
+                        "sale",
+                        "usd",
+                        saleUsdValyutaList[i],
+                        saleUsdValyutaList[sumSaleUsd].substring(0, 6).replace(" ", "")
+                    )
+                )
+                sumSaleUsd += 2
+            }
+            /// usd ///
+
+            /// rub ///
+            val organizationContactsLeftRUB =
+                doc.getElementsByClass("organization-contacts")[1].getElementsByClass("bc-inner-blocks-left")[0]
+            val buyRubValyutaList = organizationContactsLeftRUB.getElementsByTag("span").eachText()
+            var sumBuyRub = 2
+            for (i in 1 until buyRubValyutaList.lastIndex step 2) {
+                buyRubList.add(
+                    Data(
+                        "buy",
+                        "rub",
+                        buyRubValyutaList[i],
+                        buyRubValyutaList[sumBuyRub].substring(0, 3).replace(" ", "")
+                    )
+                )
+                sumBuyRub += 2
             }
 
-            @Throws(CertificateException::class)
-            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+            val organizationContactsRightRUB =
+                doc.getElementsByClass("organization-contacts")[1].getElementsByClass("bc-inner-blocks-right")[0]
+            val saleRubValyutaList =
+                organizationContactsRightRUB.getElementsByTag("span").eachText()
+            var sumSaleRub = 2
+            for (i in 1 until saleRubValyutaList.lastIndex step 2) {
+                saleRubList.add(
+                    Data(
+                        "sale",
+                        "rub",
+                        saleRubValyutaList[i],
+                        saleRubValyutaList[sumSaleRub].substring(0, 3).replace(" ", "")
+                    )
+                )
+                sumSaleRub += 2
+            }
+            /// rub ///
+
+            /// eur ///
+            val organizationContactsLeftEUR =
+                doc.getElementsByClass("organization-contacts")[2].getElementsByClass("bc-inner-blocks-left")[0]
+            val buyEurValyutaList = organizationContactsLeftEUR.getElementsByTag("span").eachText()
+            var sumBuyEur = 2
+            for (i in 1 until buyEurValyutaList.lastIndex step 2) {
+                buyEurList.add(
+                    Data(
+                        "buy",
+                        "eur",
+                        buyEurValyutaList[i],
+                        buyEurValyutaList[sumBuyEur].substring(0, 6).replace(" ", "")
+                    )
+                )
+                sumBuyEur += 2
             }
 
-            override fun getAcceptedIssuers(): Array<X509Certificate> {
-                return arrayOf()
+            val organizationContactsRightEUR =
+                doc.getElementsByClass("organization-contacts")[2].getElementsByClass("bc-inner-blocks-right")[0]
+            val saleEurValyutaList =
+                organizationContactsRightEUR.getElementsByTag("span").eachText()
+            println(saleEurValyutaList)
+            var sumSaleEur = 2
+            for (i in 1 until saleEurValyutaList.lastIndex step 2) {
+                saleEurList.add(
+                    Data(
+                        "sale",
+                        "eur",
+                        saleEurValyutaList[i],
+                        saleEurValyutaList[sumSaleEur].substring(0, 6).replace(" ", "")
+                    )
+                )
+                sumSaleEur += 2
             }
-        })
+            println(saleEurList)
+            /// eur ///
 
-        try {
-            val sslContext = SSLContext.getInstance("TLS")
-            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
-            return sslContext.socketFactory
-        } catch (e: Exception) {
-            when (e) {
-                is RuntimeException, is KeyManagementException -> {
-                    throw RuntimeException("Failed to create a SSL socket factory", e)
-                }
-                else -> throw e
+            /// gbp ///
+            val organizationContactsLeftGBP =
+                doc.getElementsByClass("organization-contacts")[3].getElementsByClass("bc-inner-blocks-left")[0]
+            val buyGbpValyutaList = organizationContactsLeftGBP.getElementsByTag("span").eachText()
+            var sumBuyGbp = 2
+            for (i in 1 until buyGbpValyutaList.lastIndex step 2) {
+                buyGbpList.add(
+                    Data(
+                        "buy",
+                        "gbp",
+                        buyGbpValyutaList[i],
+                        buyGbpValyutaList[sumBuyGbp].substring(0, 6).replace(" ", "")
+                    )
+                )
+                sumBuyGbp += 2
+            }
+
+            val organizationContactsRightGBP =
+                doc.getElementsByClass("organization-contacts")[3].getElementsByClass("bc-inner-blocks-right")[0]
+            val saleGbpValyutaList =
+                organizationContactsRightGBP.getElementsByTag("span").eachText()
+            var sumSaleGbp = 2
+            for (i in 1 until saleGbpValyutaList.lastIndex step 2) {
+                saleGbpList.add(
+                    Data(
+                        "sale",
+                        "gbp",
+                        saleGbpValyutaList[i],
+                        saleGbpValyutaList[sumSaleGbp].substring(0, 6).replace(" ", "")
+                    )
+                )
+                sumSaleGbp += 2
+            }
+            /// gbp ///
+
+            /// jpy ///
+            val organizationContactsLeftJPY =
+                doc.getElementsByClass("organization-contacts")[4].getElementsByClass("bc-inner-blocks-left")[0]
+            val buyJpyValyutaList = organizationContactsLeftJPY.getElementsByTag("span").eachText()
+            var sumBuyJpy = 2
+            for (i in 1 until buyJpyValyutaList.lastIndex step 2) {
+                buyJpyList.add(
+                    Data(
+                        "buy",
+                        "jpy",
+                        buyJpyValyutaList[i],
+                        buyJpyValyutaList[sumBuyJpy].substring(0, 3).replace(" ", "")
+                    )
+                )
+                sumBuyJpy += 2
+            }
+
+            val organizationContactsRightJPY =
+                doc.getElementsByClass("organization-contacts")[4].getElementsByClass("bc-inner-blocks-right")[0]
+            val saleJpyValyutaList =
+                organizationContactsRightJPY.getElementsByTag("span").eachText()
+            var sumSaleJpy = 2
+            for (i in 1 until saleJpyValyutaList.lastIndex step 2) {
+                saleJpyList.add(
+                    Data(
+                        "sale",
+                        "jpy",
+                        saleJpyValyutaList[i],
+                        saleJpyValyutaList[sumSaleJpy].substring(0, 3).replace(" ", "")
+                    )
+                )
+                sumSaleJpy += 2
+            }
+            /// jpy ///
+            MainScope().launch {
+                dataList()
+                binding.progressBar.visible(false)
+                banksAdapter.submitList(dataList)
             }
         }
     }
 
+    private fun dataList() {
+        /// usd ///
+        buyUsdList.forEach { data ->
+            dataList.add(BanksModel(bankName = data.bankName))
+        }
+        buyUsdList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.buyUsd = data.sum
+        }
+        saleUsdList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.saleUsd = data.sum
+        }
+        /// usd ///
+
+        /// rub ///
+        buyRubList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.buyRub = data.sum
+        }
+        saleRubList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.saleRub = data.sum
+        }
+        /// rub ///
+
+        /// eur ///
+        println(saleEurList)
+        buyEurList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.buyEur = data.sum
+        }
+        saleEurList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.saleEur = data.sum
+        }
+        /// eur ///
+
+        /// gbp ///
+        buyGbpList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.buyGbp = data.sum
+        }
+        saleGbpList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.saleGbp = data.sum
+        }
+        /// gbp ///
+
+        /// jpy ///
+        buyJpyList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.buyJpy = data.sum
+        }
+        saleJpyList.forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.saleJpy = data.sum
+        }
+        /// jpy ///
+
+        /// set logo ///
+        Helper.bankLogoList().forEach { data ->
+            dataList.find { it.bankName == data.bankName }?.banksLogo = data.logo
+        }
+        /// set logo ///
+    }
+
+    data class Data(
+        var typeByBuyOrSaleValyuta: String = "",
+        var typeValyuta: String = "",
+        var bankName: String = "",
+        var sum: String = ""
+    )
 
     private fun isNetwork() {
         networkLiveData.observe(this, {
             if (it != null) {
                 if (it) {
-                    observeDataFromMarkaziyBank()
-
-                    observeDataFromAsakaBank()
-
-                    observeDataFromIpotekaBank()
-
-                    observeDataFromKapitalBank()
-
-                    observeQishloqQurilishBank()
-
-                    observeSanoatQurilishBank()
-
-                    observeTurkistonBank()
-
-                    observeAloqaBank()
-
-                    observeIpakYoliBank()
-
-                    observeSaderatBank()
-
-                    observeXalqBank()
-
                     binding.progressBar.visible(true)
+                    observeDataFromMarkaziyBank()
+                    getData()
                 } else
                     dialogs.showNoConnectionDialog(this, lifecycleScope)
             } else
@@ -172,70 +335,145 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, Di
         preferenceManager = PreferencesManager(this)
 
         dialogs = Dialogs(this)
-
-        with(binding) {
-            swipeRefreshLayout.setOnRefreshListener(this@BanksActivity)
-        }
     }
+
+    private var isDown = false
 
     private fun observeDataFromMarkaziyBank() {
         with(binding) {
-            stateProgressAndLoadedData(true)
             viewModel.getMarkaziyBankValyuta().observe(this@BanksActivity, { elements ->
                 if (elements != null) {
-                    dataList.add(
-                        BanksModel(
-                            bankId = 0,
-                            banksLogo = R.drawable.markaziy_bank_logo,
-                            bankName = "Markaziy bank",
-                            buyUsd = "50000",
-                            saleUsd = "50000",
-                            buyEur = "50000",
-                            saleEur = "50000",
-                            buyGbp = "50000",
-                            saleGbp = "50000",
-                            buyChf = "50000",
-                            saleChf = "50000",
-                            buyJpy = "50000",
-                            saleJpy = "50000",
-                            buyRub = "50000",
-                            saleRub = "50000",
-                            buyUsdAtm = "50000",
-                            saleUsdAtm = "50000",
-                            cbuUsd = elements[0].text(),
-                            cbuEur = elements[1].text(),
-                            cbuRub = elements[2].text(),
-                            cbuGbp = elements[3].text(),
-                            cbuJpy = elements[4].text(),
-                            cbuChf = elements[5].text()
-                        )
-                    )
-                    banksAdapter.submitList(dataList.sortedBy { it.bankId })
-                    banksAdapter.notifyDataSetChanged()
+                    val cbuUsd = elements[0].text()
+                    val cbuEur = elements[1].text()
+                    val cbuRub = elements[2].text()
+                    val cbuGbp = elements[3].text()
+                    val cbuJpy = elements[4].text()
+                    val cbuChf = elements[5].text()
+                    with(binding) {
+                        tvCbuUsd.text = cbuUsd
+                        tvCbuChf.text = cbuChf
+                        tvCbuEur.text = cbuEur
+                        tvCbuJpy.text = cbuJpy
+                        tvCbuGbp.text = cbuGbp
+                        tvCbuRub.text = cbuRub
+                        ivDropDown.setOnClickListener {
+                            isDown = !isDown
+                            if (isDown) {
+                                ivDropDown.setImageResource(R.drawable.ic_arrow_up)
+                                llValyutaCbu.visible(true)
+                            } else {
+                                ivDropDown.setImageResource(R.drawable.ic_arrow_down)
+                                llValyutaCbu.visible(false)
+                            }
+                        }
+                    }
                     rv.layoutManager?.scrollToPosition(0)
                     progressBar.visible(false)
-                    isLoaded = true
-                    stateProgressAndLoadedData(false)
-                } else
-                    stateProgressAndLoadedData(false)
+                }
             })
         }
     }
 
-    private fun stateProgressAndLoadedData(isState: Boolean) {
+    private fun clicks() {
         with(binding) {
-            if (isState) {
-                progressBar.visible(true)
-                swipeRefreshLayout.isRefreshing = true
-                isLoaded = false
-            } else {
-                progressBar.visible(false)
-                swipeRefreshLayout.isRefreshing = false
-                isLoaded = true
+            ivKursTypeUpdate.setOnClickListener {
+                dialogs.showDialog(this@BanksActivity)
+            }
+            ivQqb.setOnClickListener {
+                startActivity(Intent(this@BanksActivity, QQBBankActivity::class.java))
             }
         }
     }
 
+    private fun initRV() {
+        banksAdapter = BanksAdapter(this)
+        with(binding) {
+            rv.layoutManager = LinearLayoutManager(this@BanksActivity)
+            rv.adapter = banksAdapter
+        }
+    }
+
+    override fun itemClick(position: Int, data: BanksModel) {
+        val intent = Intent(this, ItemBankActivity::class.java)
+        intent.putExtra("data_intent", bundleOf("data" to data))
+        startActivity(intent)
+    }
+
+    override fun itemBuyOrSaleValyutaDialogClick(buyOrSale: String) {
+        dialogs.showBuyAndSaleAllValyutaDialog(this, buyOrSale)
+    }
+
+    override fun itemAllKursTypeDialogClick(buyOrSale: String, typeKursValyuta: String) {
+        when (buyOrSale) {
+            "buy" -> {
+                when (typeKursValyuta) {
+                    "usd" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyUsd.toInt() })
+                        //banksAdapter.notifyDataSetChanged()
+
+                    }
+                    "eur" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyEur.toInt() })
+                        //banksAdapter.notifyDataSetChanged()
+
+                    }
+                    "gbp" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyGbp.toInt() })
+                        //banksAdapter.notifyDataSetChanged()
+
+                    }
+                    "jpy" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyJpy.toInt() })
+                        //banksAdapter.notifyDataSetChanged()
+                        println(dataList)
+
+                    }
+                    "rub" -> {
+                        banksAdapter.submitList(dataList.sortedBy { it.buyRub.toInt() })
+                        //banksAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+            "sale" -> {
+                when (typeKursValyuta) {
+                    "usd" -> {
+                        banksAdapter.submitList(dataList.sortedByDescending { it.saleUsd.toInt() })
+                        //  banksAdapter.notifyDataSetChanged()
+                    }
+                    "eur" -> {
+                        banksAdapter.submitList(dataList.sortedByDescending { it.saleEur.toInt() })
+                        //  banksAdapter.notifyDataSetChanged()
+                    }
+                    "gbp" -> {
+                        banksAdapter.submitList(dataList.sortedByDescending { it.saleGbp.toInt() })
+                        // banksAdapter.notifyDataSetChanged()
+                    }
+                    "jpy" -> {
+                        banksAdapter.submitList(dataList.sortedByDescending { it.saleJpy.toInt() })
+                        // banksAdapter.notifyDataSetChanged()
+                    }
+                    "rub" -> {
+                        banksAdapter.submitList(dataList.sortedByDescending { it.saleRub.toInt() })
+                        // banksAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        }
+    }
+
+//    override fun onRefresh() {
+//        if (networkLiveData.value!!) {
+//            dataList.clear()
+//            isNetwork()
+//        } else {
+//            binding.swipeRefreshLayout.isRefreshing = false
+//            dialogs.showNoConnectionDialog(this, lifecycleScope)
+//            binding.root.snackbar("Iltimos internetni yoqib keyin urinib ko'ring!")
+//        }
+//    }
+}
+
+/*
     private fun observeDataFromAsakaBank() {
         with(binding) {
             stateProgressAndLoadedData(true)
@@ -548,7 +786,6 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, Di
             stateProgressAndLoadedData(true)
             viewModel.getXalqBankValyuta().observe(this@BanksActivity, { elements ->
                 if (elements != null) {
-                    println(elements)
                     val buyUsd =
                         elements[0].getElementsByClass("row currency__amount no-gutters")[0].getElementsByClass(
                             "col-4 col-sm-2 inner__rate"
@@ -659,129 +896,4 @@ class BanksActivity : AppCompatActivity(), BanksAdapter.BanksAdapterListener, Di
             })
         }
     }
-
-    private fun clicks() {
-        with(binding) {
-            ivKursTypeUpdate.setOnClickListener {
-                dialogs.showDialog(this@BanksActivity)
-            }
-        }
-    }
-
-    private fun initRV() {
-        banksAdapter = BanksAdapter(this)
-        with(binding) {
-            rv.layoutManager = LinearLayoutManager(this@BanksActivity)
-            rv.adapter = banksAdapter
-        }
-    }
-
-    override fun itemClick(position: Int, data: BanksModel) {
-        if (isLoaded) {
-            if (position != 0) {
-                val intent = Intent(this, ItemBankActivity::class.java)
-                intent.putExtra("data_intent", bundleOf("data" to data))
-                startActivity(intent)
-            }
-        } else {
-            binding.root.snackbar("Iltimos ma'lumotlar yuklanib bo'lishini kuting!")
-        }
-    }
-
-    override fun itemBuyOrSaleValyutaDialogClick(buyOrSale: String) {
-        dialogs.showBuyAndSaleAllValyutaDialog(this, buyOrSale)
-    }
-
-    override fun itemAllKursTypeDialogClick(buyOrSale: String, typeKursValyuta: String) {
-        when (buyOrSale) {
-            "buy" -> {
-                when (typeKursValyuta) {
-                    "usd" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyUsd = "-50000"
-                        banksAdapter.submitList(dataList.sortedBy { it.buyUsd.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                    "eur" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyEur = "-50000"
-                        banksAdapter.submitList(dataList.sortedBy { it.buyEur.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                    "gbp" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyGbp = "-50000"
-                        banksAdapter.submitList(dataList.sortedBy { it.buyGbp.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                    "chf" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyChf = "-50000"
-                        banksAdapter.submitList(dataList.sortedBy { it.buyChf.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                    "jpy" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyJpy = "-50000"
-                        banksAdapter.submitList(dataList.sortedBy { it.buyJpy.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-
-                    }
-                    "rub" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyRub = "-50000"
-                        banksAdapter.submitList(dataList.sortedBy { it.buyRub.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                }
-            }
-            "sale" -> {
-                when (typeKursValyuta) {
-                    "usd" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyUsd = "50000"
-                        banksAdapter.submitList(dataList.sortedByDescending { it.saleUsd.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                    "eur" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyEur = "50000"
-                        banksAdapter.submitList(dataList.sortedByDescending { it.saleEur.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                        binding.rv.layoutManager?.scrollToPosition(0)
-                    }
-                    "gbp" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyGbp = "50000"
-                        banksAdapter.submitList(dataList.sortedByDescending { it.saleGbp.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                    }
-                    "chf" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyChf = "50000"
-                        banksAdapter.submitList(dataList.sortedByDescending { it.saleChf.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                    }
-                    "jpy" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyJpy = "50000"
-                        banksAdapter.submitList(dataList.sortedByDescending { it.saleJpy.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                    }
-                    "rub" -> {
-                        dataList.find { it.bankName == "Markaziy bank" }?.buyRub = "50000"
-                        banksAdapter.submitList(dataList.sortedByDescending { it.saleRub.toInt() })
-                        banksAdapter.notifyDataSetChanged()
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onRefresh() {
-        if (networkLiveData.value!!) {
-            dataList.clear()
-            isNetwork()
-        } else {
-            binding.swipeRefreshLayout.isRefreshing = false
-            dialogs.showNoConnectionDialog(this, lifecycleScope)
-            binding.root.snackbar("Iltimos internetni yoqib keyin urinib ko'ring!")
-        }
-    }
-}
+ */

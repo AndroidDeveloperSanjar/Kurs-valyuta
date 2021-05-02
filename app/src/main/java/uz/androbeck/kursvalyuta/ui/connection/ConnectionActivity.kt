@@ -2,7 +2,6 @@ package uz.androbeck.kursvalyuta.ui.connection
 
 import android.content.Intent
 import android.os.Bundle
-import android.viewbinding.library.activity.viewBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import uz.androbeck.kursvalyuta.databinding.ActivityConnectionBinding
@@ -14,12 +13,13 @@ class ConnectionActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshList
 
     private lateinit var networkLiveData: NetworkLiveData
 
-    private val binding: ActivityConnectionBinding by viewBinding()
+    private lateinit var binding: ActivityConnectionBinding
 
     private var isNetwork = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityConnectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         init()
